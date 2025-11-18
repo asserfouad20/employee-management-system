@@ -56,10 +56,10 @@ export const getEmployees = async (id) => {
   let employees;
   try {
     const response = await axios.get(
-      `http://localhost:5000/api/employee/department/${id}`,
+      `/api/employee/department/${id}`,
       {
         headers: {
-          Auhtorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );

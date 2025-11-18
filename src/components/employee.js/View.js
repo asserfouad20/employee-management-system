@@ -14,7 +14,7 @@ const View = () => {
     const fetchEmployee = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/employee/${id}`,
+          `/api/employee/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
