@@ -87,12 +87,7 @@ export default function AddSalary() {
       setSubmitting(false);
     }
   };
-  const inputStyles = `
-  mt-1 block w-full border border-gray-300 rounded-xl
-  px-3 py-2
-  focus:outline-none focus:ring-2 focus:ring-teal-600
-  transition-shadow duration-200 ease-in-out
-`;
+  const inputStyles = "mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out";
   // 5️⃣ The actual return at component level:
   return (
     <div className="max-w-4xl mx-auto mt-20 bg-white p-8 rounded-3xl shadow-2xl">

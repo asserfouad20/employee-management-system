@@ -57,11 +57,7 @@ const AddDepartment = () => {
             placeholder="Enter Dept Name"
             value={department.dep_name}
             onChange={handleChange}
-            className="
-              mt-1 w-full p-2 border border-gray-300 rounded-2xl
-              transition-shadow duration-200 ease-in-out
-              focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600
-            "
+            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
           />
         </div>
 
@@ -80,11 +76,7 @@ const AddDepartment = () => {
             placeholder="Description"
             value={department.description}
             onChange={handleChange}
-            className="
-              mt-1 w-full p-2 border border-gray-300 rounded-lg
-              transition-shadow duration-200 ease-in-out
-              focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600
-            "
+            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
           />
         </div>
 

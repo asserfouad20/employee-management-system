@@ -261,7 +261,7 @@ const Attendance = () => {
             placeholder="Search by name, ID, or status..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out w-64"
           />
 
           <button
@@ -320,7 +320,7 @@ const Attendance = () => {
                     value={formData.employeeId}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
                   >
                     <option value="">Select Employee</option>
                     {employees.map((emp) => (
@@ -341,7 +341,7 @@ const Attendance = () => {
                     value={formData.date}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
                   />
                 </div>
 
@@ -354,7 +354,7 @@ const Attendance = () => {
                     value={formData.status}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
                   >
                     <option value="Present">Present</option>
                     <option value="Absent">Absent</option>
@@ -374,7 +374,7 @@ const Attendance = () => {
                     name="timeIn"
                     value={formData.timeIn}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
                   />
                 </div>
 
@@ -387,7 +387,7 @@ const Attendance = () => {
                     name="timeOut"
                     value={formData.timeOut}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
                   />
                 </div>
 
@@ -400,7 +400,7 @@ const Attendance = () => {
                     value={formData.remarks}
                     onChange={handleInputChange}
                     rows="3"
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
                     placeholder="Optional remarks..."
                   />
                 </div>
