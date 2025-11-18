@@ -18,7 +18,7 @@ const EditDepartment = () => {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/department/${id}`,
+          `/api/department/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -53,7 +53,7 @@ const EditDepartment = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/department/${id}`,
+        `/api/department/${id}`,
         department,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

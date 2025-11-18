@@ -56,7 +56,7 @@ const Attendance = () => {
 
   const fetchAttendance = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/attendance", {
+      const response = await axios.get("/api/attendance", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -78,7 +78,7 @@ const Attendance = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/employee", {
+      const response = await axios.get("/api/employee", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -100,7 +100,7 @@ const Attendance = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/attendance/mark",
+        "/api/attendance/mark",
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -140,7 +140,7 @@ const Attendance = () => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/attendance/${id}`,
+        `/api/attendance/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

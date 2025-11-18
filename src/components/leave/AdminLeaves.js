@@ -135,7 +135,7 @@ const AdminLeaves = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/leave", {
+      const response = await axios.get("/api/leave", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -172,7 +172,7 @@ const AdminLeaves = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `http://localhost:5000/api/leave/${leaveId}`,
+        `/api/leave/${leaveId}`,
         { status },
         {
           headers: {

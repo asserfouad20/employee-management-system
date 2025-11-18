@@ -48,7 +48,7 @@ const Settings = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        "http://localhost:5000/api/employee/change-password",
+        "/api/employee/change-password",
         {
           currentPassword: formData.currentPassword,
           newPassword: formData.newPassword,
