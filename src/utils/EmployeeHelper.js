@@ -22,7 +22,7 @@ export const columns = [
     selector: (row) => row.image,
     cell: (row) => (
       <img
-        src={row.image ? `/uploads/${row.image}` : `https://ui-avatars.com/api/?name=${encodeURIComponent(row.name)}&background=0D8ABC&color=fff`}
+        src={row.image ? `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/uploads/${row.image}` : `https://ui-avatars.com/api/?name=${encodeURIComponent(row.name)}&background=0D8ABC&color=fff`}
         alt={row.name}
         className="h-8 w-8 rounded-full object-cover"
       />
