@@ -189,7 +189,7 @@ const AttendanceReport = () => {
               name="employeeId"
               value={filters.employeeId}
               onChange={handleFilterChange}
-              className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
             >
               <option value="">All Employees</option>
               {employees.map((emp) => (
@@ -208,7 +208,7 @@ const AttendanceReport = () => {
               name="month"
               value={filters.month}
               onChange={handleFilterChange}
-              className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
             >
               {months.map((month) => (
                 <option key={month.value} value={month.value}>
@@ -224,7 +224,7 @@ const AttendanceReport = () => {
               name="year"
               value={filters.year}
               onChange={handleFilterChange}
-              className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
             >
               {years.map((year) => (
                 <option key={year} value={year}>

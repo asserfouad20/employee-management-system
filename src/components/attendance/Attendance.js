@@ -228,7 +228,7 @@ const Attendance = () => {
       cell: (row) => (
         <button
           onClick={() => handleDelete(row._id)}
-          className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700"
+          className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
         >
           Delete
         </button>
@@ -261,12 +261,12 @@ const Attendance = () => {
             placeholder="Search by name, ID, or status..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out w-64"
+            className="border border-gray-300 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
           />
 
           <button
             onClick={() => setShowModal(true)}
-            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 h-[42px]"
+            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 h-[42px] transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
           >
             Mark Attendance
           </button>
@@ -320,7 +320,7 @@ const Attendance = () => {
                     value={formData.employeeId}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   >
                     <option value="">Select Employee</option>
                     {employees.map((emp) => (
@@ -341,7 +341,7 @@ const Attendance = () => {
                     value={formData.date}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
@@ -354,7 +354,7 @@ const Attendance = () => {
                     value={formData.status}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   >
                     <option value="Present">Present</option>
                     <option value="Absent">Absent</option>
@@ -374,7 +374,7 @@ const Attendance = () => {
                     name="timeIn"
                     value={formData.timeIn}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
@@ -387,7 +387,7 @@ const Attendance = () => {
                     name="timeOut"
                     value={formData.timeOut}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
@@ -400,7 +400,7 @@ const Attendance = () => {
                     value={formData.remarks}
                     onChange={handleInputChange}
                     rows="3"
-                    className="w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 hover:border-gray-400 transition-all duration-300 ease-in-out"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder="Optional remarks..."
                   />
                 </div>

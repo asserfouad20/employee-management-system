@@ -8,14 +8,12 @@ export const columns = [
     name: "Serial No",
     cell: (row) => <span className="text-md font-medium">{row.sno}</span>,
     style: { width: "70px" },
-    center: true,
   },
   {
     name: "Name",
     cell: (row) => <span className="text-sm font-medium">{row.name}</span>,
     sortable: true,
     style: { width: "100px" },
-    center: true,
   },
   {
     name: "Image",
@@ -24,31 +22,27 @@ export const columns = [
       <img
         src={row.image ? `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/uploads/${row.image}` : `https://ui-avatars.com/api/?name=${encodeURIComponent(row.name)}&background=0D8ABC&color=fff`}
         alt={row.name}
-        className="h-8 w-8 rounded-full object-cover"
+        className="h-8 w-8 rounded-full object-cover mx-auto"
       />
     ),
     style: { width: "90px" },
-    center: true,
   },
   {
     name: "Department",
     cell: (row) => <span className="text-sm font-medium">{row.dept}</span>,
     sortable: true,
     style: { width: "120px" },
-    center: true,
   },
   {
     name: "DOB",
     cell: (row) => <span className="text-sm font-medium">{row.dob}</span>,
     sortable: true,
     style: { width: "130px" },
-    center: true,
   },
 
   {
     name: "Action",
     selector: (row) => row.action,
-    center: true,
   },
 ];
 // employees for salary
