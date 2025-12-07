@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { showToast } from "../../utils/toast";
 
 const EditDepartment = () => {
   const { id } = useParams();
@@ -31,11 +32,11 @@ const EditDepartment = () => {
             description: data.department.description || "",
           });
         } else {
-          alert(data.error);
+          showToast.error(data.error);
         }
       } catch (err) {
         console.error(err);
-        alert("Error loading department");
+        showToast.error("Error loading department");
       } finally {
         setLoading(false);
       }
@@ -62,11 +63,11 @@ const EditDepartment = () => {
       if (data.success) {
         navigate("/admin-dashboard/departments");
       } else {
-        alert(data.error);
+        showToast.error(data.error);
       }
     } catch (err) {
       console.error(err);
-      alert("Update failed");
+      showToast.error("Update failed");
     }
   };
 
@@ -106,7 +107,7 @@ const EditDepartment = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
+          className="w-full bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
         >
           Update
         </button>

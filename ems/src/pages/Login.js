@@ -145,7 +145,7 @@ const Login = () => {
               </label>
               <button
                 type="button"
-                className="text-sm sm:text-base text-teal-600 hover:underline focus:outline-none"
+                className="text-sm sm:text-base text-teal-600 hover:underline focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded px-2 py-1"
               >
                 Forgot password?
               </button>
@@ -154,8 +154,7 @@ const Login = () => {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full bg-teal-600 text-white py-2 rounded-3xl text-base sm:text-lg
-                         hover:bg-teal-700 transition-colors"
+              className="w-full bg-teal-600 text-white px-4 py-2 rounded-3xl font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
               Login
             </button>

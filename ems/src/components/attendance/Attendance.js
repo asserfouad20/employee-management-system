@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
+import { showToast } from "../../utils/toast";
 
 const Attendance = () => {
   const [attendanceRecords, setAttendanceRecords] = useState([]);
@@ -133,11 +134,36 @@ const Attendance = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this record?")) {
-      return;
-    }
+  const handleDelete = (id) => {
+    showToast.confirm(
+      "Are you sure you want to delete this record?",
+      async () => {
+        // On confirm
+        try {
+          const response = await axios.delete(
+            `/api/attendance/${id}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
 
+          if (response.data.success) {
+            showToast.success("Attendance record deleted successfully");
+            fetchAttendance();
+          }
+        } catch (error) {
+          showToast.error(error.response?.data?.error || "Failed to delete record");
+        }
+      },
+      () => {
+        // On cancel
+        showToast.info("Delete cancelled");
+      }
+    );
+  };
+
+  // Keep the old toast system for other notifications in this file
+  const handleDeleteOld = async (id) => {
     try {
       const response = await axios.delete(
         `/api/attendance/${id}`,
@@ -228,7 +254,7 @@ const Attendance = () => {
       cell: (row) => (
         <button
           onClick={() => handleDelete(row._id)}
-          className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+          className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
         >
           Delete
         </button>
@@ -266,7 +292,7 @@ const Attendance = () => {
 
           <button
             onClick={() => setShowModal(true)}
-            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 h-[42px] transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
+            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 h-[42px] transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
           >
             Mark Attendance
           </button>
@@ -410,13 +436,13 @@ const Attendance = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-100"
+                  className="bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-700"
+                  className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                 >
                   Submit
                 </button>

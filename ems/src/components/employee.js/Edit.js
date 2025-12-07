@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import { showToast } from "../../utils/toast";
 
 export default function EditEmployee() {
   const { id } = useParams();
@@ -51,11 +52,11 @@ export default function EditEmployee() {
             department: employee.department,
           }));
         } else {
-          alert(data.error || "Failed to load employee");
+          showToast.error(data.error || "Failed to load employee");
         }
       } catch (err) {
         console.error("Error loading employee:", err);
-        alert("Server error while loading employee");
+        showToast.error("Server error while loading employee");
       }
     };
 
@@ -94,11 +95,11 @@ export default function EditEmployee() {
       if (res.data.success) {
         navigate("/admin-dashboard/employees");
       } else {
-        alert(res.data.error);
+        showToast.error(res.data.error);
       }
     } catch (err) {
       console.error("Update employee error:", err);
-      alert(err.response?.data?.error || "Server error");
+      showToast.error(err.response?.data?.error || "Server error");
     } finally {
       setSubmitting(false);
     }
@@ -207,7 +208,7 @@ export default function EditEmployee() {
           <button
             type="submit"
             disabled={submitting}
-            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg disabled:opacity-50 disabled:transform-none"
+            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             {submitting ? "Updating…" : "Update Employee"}
           </button>

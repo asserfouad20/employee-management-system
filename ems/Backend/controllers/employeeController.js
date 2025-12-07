@@ -114,11 +114,32 @@ export const getEmployee = async (req, res) => {
 // 6️⃣ DELETE: deleteEmployee
 export const deleteEmployee = async (req, res) => {
   try {
-    const emp = await Employee.findByIdAndDelete(req.params.id);
+    // First find the employee to get the userId
+    const emp = await Employee.findById(req.params.id);
     if (!emp) {
-      return res.status(404).json({ success: false, error: "Not found" });
+      return res.status(404).json({ success: false, error: "Employee not found" });
     }
-    return res.json({ success: true, message: "Deleted" });
+
+    // Delete all related records in cascade
+    // 1. Delete all leave records for this employee
+    const Leave = (await import("../models/Leave.js")).default;
+    await Leave.deleteMany({ employee: req.params.id });
+
+    // 2. Delete all salary records for this employee
+    const Salary = (await import("../models/Salary.js")).default;
+    await Salary.deleteMany({ employee: req.params.id });
+
+    // 3. Delete all attendance records for this employee
+    const Attendance = (await import("../models/Attendance.js")).default;
+    await Attendance.deleteMany({ employee: req.params.id });
+
+    // 4. Delete the associated User record
+    await User.findByIdAndDelete(emp.userId);
+
+    // 5. Delete the Employee record
+    await Employee.findByIdAndDelete(req.params.id);
+
+    return res.json({ success: true, message: "Employee and all related records deleted successfully" });
   } catch (err) {
     console.error("deleteEmployee error:", err);
     return res.status(500).json({ success: false, error: "Server error" });

@@ -24,7 +24,22 @@
       "Bash(find . -name \"*.js\" -type f -exec powershell -Command \"(Get-Content ''{}'') -replace ''http://localhost:5000/api/'', ''/api/'' | Set-Content ''{}''\" ;)",
       "Bash(npm run build:*)",
       "Bash(git remote set-url:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(mkdir:*)",
+      "Bash(tree:*)",
+      "Bash(npm install:*)",
+      "Bash(git remote:*)",
+      "Bash(git clone:*)",
+      "Bash(gh --version:*)",
+      "Bash(npm start)",
+      "Bash(taskkill /F /PID 35028)",
+      "Bash(taskkill //F //PID 35028)",
+      "Bash(systeminfo:*)",
+      "Bash(wmic os get osarchitecture)",
+      "Bash(del PERSONAL-PORTFOLIO.html)",
+      "Bash(git stash:*)",
+      "Bash(git rm:*)",
+      "Bash(git mv:*)"
     ],
     "deny": [],
     "ask": []

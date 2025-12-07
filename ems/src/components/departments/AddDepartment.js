@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // ← import useNavigate
 import axios from "axios"; // ← import axios
+import { showToast } from "../../utils/toast";
 
 const AddDepartment = () => {
   const [department, setDepartment] = useState({
@@ -32,7 +33,7 @@ const AddDepartment = () => {
     } catch (error) {
       console.error(error);
       const msg = error?.response?.data?.error || "Something went wrong";
-      alert(msg);
+      showToast.error(msg);
     }
   };
 
@@ -83,7 +84,7 @@ const AddDepartment = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
+          className="w-full bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
         >
           Add Department
         </button>

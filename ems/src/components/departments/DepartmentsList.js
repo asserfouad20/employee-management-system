@@ -6,6 +6,7 @@ import axios from "axios";
 import { columns } from "../../utils/DepartmentHelper";
 import { DepartmentButtons } from "../../utils/DepartmentHelper";
 import { FaPlus } from "react-icons/fa";
+import { showToast } from "../../utils/toast";
 
 const customStyles = {
   headRow: { style: { borderBottom: "1px solid #e2e8f0" } },
@@ -41,7 +42,7 @@ export default function DepartmentsList() {
         }
       } catch (err) {
         console.error(err);
-        alert(err.response?.data?.error || "Failed to load departments");
+        showToast.error(err.response?.data?.error || "Failed to load departments");
       } finally {
         setLoading(false);
       }

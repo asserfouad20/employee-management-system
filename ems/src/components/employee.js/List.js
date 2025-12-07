@@ -8,6 +8,7 @@ import {
   columns as employeeColumns,
   EmployeeButtons,
 } from "../../utils/EmployeeHelper";
+import { showToast } from "../../utils/toast";
 const customStyles = {
   headRow: {
     style: { borderBottom: "1px solid #e2e8f0" },
@@ -69,11 +70,11 @@ export default function List() {
           }));
           setEmployees(rows);
         } else {
-          alert(data.error || "Failed to load employees");
+          showToast.error(data.error || "Failed to load employees");
         }
       } catch (err) {
         console.error("Error fetching employees:", err);
-        alert(err.response?.data?.error || "Failed to load employees");
+        showToast.error(err.response?.data?.error || "Failed to load employees");
       } finally {
         setLoading(false);
       }

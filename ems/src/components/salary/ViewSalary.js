@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import axios from "axios";
+import { showToast } from "../../utils/toast";
 
 const customStyles = {
   headRow: { style: { borderBottom: "1px solid #e2e8f0" } },
@@ -94,7 +95,7 @@ export default function ViewSalary() {
         }
       } catch (err) {
         console.error(err);
-        alert("Failed to load salary history");
+        showToast.error("Failed to load salary history");
       } finally {
         setLoading(false);
       }

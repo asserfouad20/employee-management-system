@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { showToast } from "./toast";
 
 export const columns = [
   {
@@ -26,20 +27,31 @@ export const columns = [
 export const DepartmentButtons = ({ DepId, onDepartmentDelete }) => {
   const navigate = useNavigate();
 
-  const handleDelete = async () => {
-    try {
-      const { data } = await axios.delete(`/api/department/${DepId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      if (data.success) {
-        onDepartmentDelete(DepId);
-      } else {
-        alert(data.error || "Delete failed");
+  const handleDelete = () => {
+    showToast.confirm(
+      "Are you sure you want to delete this department?",
+      async () => {
+        // On confirm
+        try {
+          const { data } = await axios.delete(`/api/department/${DepId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          });
+          if (data.success) {
+            showToast.success("Department deleted successfully");
+            onDepartmentDelete(DepId);
+          } else {
+            showToast.error(data.error || "Delete failed");
+          }
+        } catch (err) {
+          console.error("Delete error:", err);
+          showToast.error("Server error during delete");
+        }
+      },
+      () => {
+        // On cancel
+        showToast.info("Delete cancelled");
       }
-    } catch (err) {
-      console.error("Delete error:", err);
-      alert("Server error during delete");
-    }
+    );
   };
 
   return (
@@ -47,14 +59,14 @@ export const DepartmentButtons = ({ DepId, onDepartmentDelete }) => {
       <button
         onClick={() => navigate(`/admin-dashboard/department/${DepId}`)}
         aria-label="Edit Department"
-        className="p-2 bg-gray-500 text-white rounded-3xl hover:bg-gray-600 transition"
+        className="p-2 bg-gray-500 text-white rounded-3xl hover:bg-gray-600 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
       >
         <FaEdit size={16} />
       </button>
       <button
         onClick={handleDelete}
         aria-label="Delete Department"
-        className="p-2 bg-red-600 text-white rounded-3xl hover:bg-red-700 transition"
+        className="p-2 bg-red-600 text-white rounded-3xl hover:bg-red-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
       >
         <FaTrash size={16} />
       </button>

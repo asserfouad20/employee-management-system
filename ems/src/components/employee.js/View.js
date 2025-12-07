@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { showToast } from "../../utils/toast";
 
 const View = () => {
   const navigate = useNavigate();
@@ -24,11 +25,11 @@ const View = () => {
         if (data.success) {
           setEmployee(data.employee);
         } else {
-          alert(data.error || "Failed to load employee");
+          showToast.error(data.error || "Failed to load employee");
         }
       } catch (err) {
         console.error("Error loading employee:", err);
-        alert("Server error while loading employee");
+        showToast.error("Server error while loading employee");
       } finally {
         setLoading(false);
       }
@@ -56,7 +57,7 @@ const View = () => {
       {/* Back button */}
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center text-teal-600 hover:underline"
+        className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
       >
         <FaArrowLeft className="mr-2" />
         Back to Employees

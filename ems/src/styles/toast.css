@@ -1,0 +1,70 @@
+/* Custom Toast Animations */
+
+@keyframes spread-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(-20px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-spread-in {
+  animation: spread-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Toast Container Centering */
+.toast-confirm-center {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.toast-confirm-center .Toastify__toast-body {
+  padding: 0;
+}
+
+/* Remove default toast background for confirm */
+.Toastify__toast--warning.toast-confirm-center {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Backdrop overlay for confirmation toast */
+.Toastify__toast-container--top-center::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Custom zoom transition enhancement */
+.Toastify__zoom-enter {
+  animation-duration: 0.4s !important;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.Toastify__zoom-exit {
+  animation-duration: 0.3s !important;
+  animation-timing-function: ease-in-out !important;
+}

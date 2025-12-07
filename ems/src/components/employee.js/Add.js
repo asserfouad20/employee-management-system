@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { showToast } from "../../utils/toast";
 
 export default function AddEmployee() {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ export default function AddEmployee() {
       if (res.data.success) {
         navigate("/admin-dashboard/employees");
       } else {
-        alert(res.data.error);
+        showToast.error(res.data.error);
       }
     } catch (err) {
       const validationErrors = err.response?.data?.errors;
@@ -75,11 +76,11 @@ export default function AddEmployee() {
           console.error(`${field}: ${message}`);
         });
         console.groupEnd();
-        alert("Validation errors - check console for details");
+        showToast.error("Validation errors - check console for details");
       } else {
         console.error("Add employee error:", err);
         const errorMessage = err.response?.data?.error || err.response?.data?.message || "Failed to add employee. Please check if Employee ID already exists.";
-        alert(errorMessage);
+        showToast.error(errorMessage);
       }
 
       const msg =
@@ -88,7 +89,7 @@ export default function AddEmployee() {
           .map((e) => e.message)
           .join(", ") ||
         "Server error";
-      alert(msg);
+      showToast.error(msg);
     } finally {
       setSubmitting(false);
     }
@@ -313,7 +314,7 @@ export default function AddEmployee() {
           <button
             type="submit"
             disabled={submitting}
-            className="bg-teal-600 text-white py-3 px-8 rounded-xl hover:bg-teal-700 transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             {submitting ? "Adding…" : "Add Employee"}
           </button>
