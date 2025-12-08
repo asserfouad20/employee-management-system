@@ -30,8 +30,16 @@ fra/
 sra/
 *.zip
 *.ps1
-*.html
-*.jpg
-*.avif
-*.webp
-*.cjs
+
+# Exclude specific non-EMS files in root directory only
+/CALCULATOR.html
+/CONTACT-CARD.html
+/IMPROVED-LP.html
+/index.html
+/FARA7.jpg
+/LP.avif
+/pexels-anniroenkae-3109850.jpg
+/JWTTOKENBASEDAUTH.cjs
+/SESSIONBASEDAUTH.cjs
+/cookies.txt
+/eslint.config.js
