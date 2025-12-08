@@ -7,9 +7,36 @@ import { useAuth } from "../context/authContext"; // adjust this import to where
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  // Load saved credentials on component mount
+  useEffect(() => {
+    const savedCredentials = localStorage.getItem("rememberedCredentials");
+    if (savedCredentials) {
+      try {
+        const { email: savedEmail, password: savedPassword } = JSON.parse(savedCredentials);
+        setEmail(savedEmail);
+        setPassword(savedPassword);
+        setRememberMe(true);
+      } catch (e) {
+        console.error("Failed to load saved credentials:", e);
+      }
+    }
+  }, []);
+
+  // Handle clearing saved credentials when user unchecks "Remember Me"
+  const handleRememberMeChange = (e) => {
+    const isChecked = e.target.checked;
+    setRememberMe(isChecked);
+
+    // If unchecking, immediately remove saved credentials
+    if (!isChecked) {
+      localStorage.removeItem("rememberedCredentials");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,20 +47,32 @@ const Login = () => {
       const { data } = await axios.post("/api/auth/login", { email, password });
 
       if (data.success) {
-        // 1) update auth context
+        // 1) Handle "Remember Me" functionality
+        if (rememberMe) {
+          // Save credentials to localStorage
+          localStorage.setItem(
+            "rememberedCredentials",
+            JSON.stringify({ email, password })
+          );
+        } else {
+          // Remove saved credentials if "Remember Me" is unchecked
+          localStorage.removeItem("rememberedCredentials");
+        }
+
+        // 2) update auth context
         login(data.user);
 
-        // 2) persist the JWT
+        // 3) persist the JWT
         localStorage.setItem("token", data.token);
 
-        // 3) show success toast
+        // 4) show success toast
         setToast({
           show: true,
           message: "Logged in successfully!",
           type: "success",
         });
 
-        // 4) redirect based on role
+        // 5) redirect based on role
         if (data.user.role === "admin") {
           navigate("/admin-dashboard");
         } else {
@@ -60,7 +99,7 @@ const Login = () => {
   }, [toast.show]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-600 to-gray-100 flex items-center justify-center px-4 sm:px-6 lg:px-8 relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#0f1419] via-[#1a1f26] to-[#0f1419] flex items-center justify-center px-4 sm:px-6 lg:px-8 relative">
       {/* Toast */}
       {toast.show && (
         <div
@@ -83,13 +122,13 @@ const Login = () => {
 
       <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
         {/* Header */}
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl text-white font-bold mb-6 sm:mb-8 text-center">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl text-gray-100 font-bold mb-6 sm:mb-8 text-center drop-shadow-lg">
           Employee Management System
         </h1>
 
         {/* Card */}
-        <div className="bg-white shadow-2xl rounded-3xl px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
+        <div className="bg-[#242b35] shadow-2xl rounded-3xl px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12 border border-gray-700/50">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-100 text-center mb-4 sm:mb-6">
             Login
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -97,7 +136,7 @@ const Login = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-gray-700 mb-1 sm:mb-2"
+                className="block text-gray-300 mb-1 sm:mb-2 font-medium"
               >
                 Email or Employee ID
               </label>
@@ -107,8 +146,7 @@ const Login = () => {
                 placeholder="Enter Email or Employee ID"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-300 rounded-3xl px-3 py-2 text-sm sm:text-base
-                           ring-0 focus:ring-2 focus:ring-teal-500 transition-shadow duration-300 ease-in-out outline-none"
+                className="w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-3xl px-3 py-2 text-sm sm:text-base ring-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out outline-none"
               />
             </div>
 
@@ -116,7 +154,7 @@ const Login = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-gray-700 mb-1 sm:mb-2"
+                className="block text-gray-300 mb-1 sm:mb-2 font-medium"
               >
                 Password
               </label>
@@ -129,23 +167,24 @@ const Login = () => {
                 pattern=".{4,}"
                 title="Password must be at least 4 characters"
                 required
-                className="w-full border border-gray-300 rounded-3xl px-3 py-2 text-sm sm:text-base
-                           ring-0 focus:ring-2 focus:ring-teal-500 transition-shadow duration-300 ease-in-out outline-none"
+                className="w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-3xl px-3 py-2 text-sm sm:text-base ring-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out outline-none"
               />
             </div>
 
             {/* Footer */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 space-y-2 sm:space-y-0">
-              <label className="inline-flex items-center text-gray-600">
+              <label className="inline-flex items-center text-gray-400 cursor-pointer">
                 <input
                   type="checkbox"
-                  className="form-checkbox h-4 w-4 text-teal-600"
+                  checked={rememberMe}
+                  onChange={handleRememberMeChange}
+                  className="form-checkbox h-4 w-4 text-blue-600 bg-[#1a1f26] border-gray-600 rounded focus:ring-blue-500 focus:ring-offset-0 cursor-pointer"
                 />
                 <span className="ml-2 text-sm sm:text-base">Remember me</span>
               </label>
               <button
                 type="button"
-                className="text-sm sm:text-base text-teal-600 hover:underline focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded px-2 py-1"
+                className="text-sm sm:text-base text-blue-400 hover:text-blue-300 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#242b35] rounded px-2 py-1"
               >
                 Forgot password?
               </button>
@@ -154,7 +193,7 @@ const Login = () => {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full bg-teal-600 text-white px-4 py-2 rounded-3xl font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+              className="w-full bg-blue-600 text-white px-4 py-3 rounded-3xl font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#242b35]"
             >
               Login
             </button>

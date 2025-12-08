@@ -6,16 +6,75 @@ import axios from "axios";
 import { showToast } from "../../utils/toast";
 
 const customStyles = {
-  headRow: { style: { borderBottom: "1px solid #e2e8f0" } },
+  table: {
+    style: {
+      backgroundColor: "#242b35",
+      color: "#e5e7eb",
+    },
+  },
+  headRow: {
+    style: {
+      backgroundColor: "#1a1f26",
+      borderBottom: "2px solid #374151",
+      color: "#e5e7eb",
+      minHeight: "52px",
+    },
+  },
   headCells: {
     style: {
       fontSize: "1rem",
       fontWeight: 600,
       textAlign: "left",
       paddingLeft: "1rem",
+      color: "#e5e7eb",
     },
   },
-  cells: { style: { textAlign: "left", paddingLeft: "1rem" } },
+  rows: {
+    style: {
+      backgroundColor: "#242b35",
+      color: "#e5e7eb",
+      minHeight: "60px",
+      "&:hover": {
+        backgroundColor: "#2d3748",
+      },
+    },
+  },
+  cells: {
+    style: {
+      textAlign: "left",
+      paddingLeft: "1rem",
+      color: "#e5e7eb",
+    },
+  },
+  pagination: {
+    style: {
+      backgroundColor: "#242b35",
+      borderTop: "1px solid #374151",
+      color: "#e5e7eb",
+    },
+    pageButtonsStyle: {
+      color: "#e5e7eb",
+      fill: "#e5e7eb",
+      "&:hover": {
+        backgroundColor: "#374151",
+      },
+      "&:disabled": {
+        fill: "#6b7280",
+      },
+    },
+  },
+  progress: {
+    style: {
+      backgroundColor: "#242b35",
+      color: "#e5e7eb",
+    },
+  },
+  noData: {
+    style: {
+      backgroundColor: "#242b35",
+      color: "#e5e7eb",
+    },
+  },
 };
 
 const columns = [
@@ -26,7 +85,7 @@ const columns = [
     selector: (row) => row.salary,
     sortable: true,
     cell: (row) => (
-      <span className="font-semibold text-blue-600">
+      <span className="font-semibold text-blue-400">
         ${row.salary.toLocaleString()}
       </span>
     ),
@@ -36,7 +95,7 @@ const columns = [
     selector: (row) => row.allowance,
     sortable: true,
     cell: (row) => (
-      <span className="font-semibold text-green-600">
+      <span className="font-semibold text-green-400">
         +${row.allowance.toLocaleString()}
       </span>
     ),
@@ -46,7 +105,7 @@ const columns = [
     selector: (row) => row.deduction,
     sortable: true,
     cell: (row) => (
-      <span className="font-semibold text-red-600">
+      <span className="font-semibold text-red-400">
         -${row.deduction.toLocaleString()}
       </span>
     ),
@@ -56,7 +115,7 @@ const columns = [
     selector: (row) => row.total,
     sortable: true,
     cell: (row) => (
-      <span className="font-bold text-teal-600 text-lg">
+      <span className="font-bold text-blue-400 text-lg">
         ${row.total.toLocaleString()}
       </span>
     ),
@@ -115,14 +174,14 @@ export default function ViewSalary() {
   return (
     <div className="pt-5 px-6 space-y-4">
       {/* 1) Title above */}
-      <h3 className="text-2xl font-bold">Salary History</h3>
+      <h3 className="text-2xl font-bold text-gray-100">Salary History</h3>
 
       {/* 2) Back button below title */}
       <div>
         <Link
           to="/admin-dashboard/employees"
           className="
-            text-teal-600 hover:underline
+            text-blue-400 hover:text-blue-300 hover:underline
             transition-colors duration-200
           "
         >
@@ -131,16 +190,23 @@ export default function ViewSalary() {
       </div>
 
       {/* 3) Table */}
-      <div className="mt-5 bg-white shadow-2xl rounded-xl overflow-hidden">
+      <div className="mt-5 bg-[#242b35] shadow-2xl rounded-xl overflow-hidden border border-gray-700/50">
         <DataTable
           columns={columns}
           data={filtered}
           customStyles={customStyles}
           progressPending={loading}
           pagination
-          highlightOnHover
-          pointerOnHover
-          noDataComponent="No salary records found"
+          noDataComponent={
+            <div className="py-12 text-center text-gray-400">
+              No salary records found
+            </div>
+          }
+          progressComponent={
+            <div className="py-12 text-center text-gray-400">
+              Loading salary records...
+            </div>
+          }
         />
       </div>
     </div>

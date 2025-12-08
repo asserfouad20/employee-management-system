@@ -22,25 +22,47 @@ const AdminSettings = () => {
   const [passwordLoading, setPasswordLoading] = useState(false);
 
   // Company Info State
-  const [companyData, setCompanyData] = useState({
-    companyName: "TechVision Solutions Inc.",
-    address: "1234 Innovation Drive, Suite 500\nSan Francisco, CA 94105\nUnited States",
-    phone: "+1 (415) 555-0123",
-    email: "info@techvisionsolutions.com",
-    website: "https://www.techvisionsolutions.com",
+  const [companyData, setCompanyData] = useState(() => {
+    // Load from localStorage if available, otherwise use defaults
+    const saved = localStorage.getItem("companyInfo");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse saved company info:", e);
+      }
+    }
+    return {
+      companyName: "TechVision Solutions Inc.",
+      address: "1234 Innovation Drive, Suite 500\nSan Francisco, CA 94105\nUnited States",
+      phone: "+1 (415) 555-0123",
+      email: "info@techvisionsolutions.com",
+      website: "https://www.techvisionsolutions.com",
+    };
   });
   const [companyLoading, setCompanyLoading] = useState(false);
   const [isEditingCompany, setIsEditingCompany] = useState(false);
   const [companySaved, setCompanySaved] = useState(true);
 
   // Leave Types State
-  const [leaveTypes, setLeaveTypes] = useState([
-    { type: "Sick Leave", maxDays: 10, enabled: true },
-    { type: "Casual Leave", maxDays: 12, enabled: true },
-    { type: "Annual Leave", maxDays: 20, enabled: true },
-    { type: "Maternity Leave", maxDays: 90, enabled: true },
-    { type: "Paternity Leave", maxDays: 15, enabled: true },
-  ]);
+  const [leaveTypes, setLeaveTypes] = useState(() => {
+    // Load from localStorage if available, otherwise use defaults
+    const saved = localStorage.getItem("leaveTypesConfig");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse saved leave types:", e);
+      }
+    }
+    return [
+      { type: "Sick Leave", maxDays: 10, enabled: true },
+      { type: "Casual Leave", maxDays: 12, enabled: true },
+      { type: "Annual Leave", maxDays: 20, enabled: true },
+      { type: "Maternity Leave", maxDays: 90, enabled: true },
+      { type: "Paternity Leave", maxDays: 15, enabled: true },
+    ];
+  });
   const [isEditingLeaveTypes, setIsEditingLeaveTypes] = useState(false);
   const [leaveTypesSaved, setLeaveTypesSaved] = useState(true);
 
@@ -134,8 +156,11 @@ const AdminSettings = () => {
     setCompanyLoading(true);
 
     try {
-      // Simulate saving company info (you can create a backend endpoint for this)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Save to localStorage for persistence
+      localStorage.setItem("companyInfo", JSON.stringify(companyData));
+
+      // Simulate API call delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       setToast({
         show: true,
@@ -145,6 +170,7 @@ const AdminSettings = () => {
       setIsEditingCompany(false);
       setCompanySaved(true);
     } catch (error) {
+      console.error("Error saving company info:", error);
       setToast({
         show: true,
         message: "Failed to save company information",
@@ -160,14 +186,18 @@ const AdminSettings = () => {
     const updatedLeaveTypes = [...leaveTypes];
     updatedLeaveTypes[index][field] = value;
     setLeaveTypes(updatedLeaveTypes);
+    setLeaveTypesSaved(false); // Mark as unsaved when changes are made
   };
 
   const handleLeaveTypesSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Simulate saving leave types (you can create a backend endpoint for this)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Save to localStorage for persistence
+      localStorage.setItem("leaveTypesConfig", JSON.stringify(leaveTypes));
+
+      // Simulate API call delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       setToast({
         show: true,
@@ -177,6 +207,7 @@ const AdminSettings = () => {
       setIsEditingLeaveTypes(false);
       setLeaveTypesSaved(true);
     } catch (error) {
+      console.error("Error saving leave types:", error);
       setToast({
         show: true,
         message: "Failed to save leave types configuration",
@@ -208,16 +239,16 @@ const AdminSettings = () => {
       )}
 
       {/* Header */}
-      <h2 className="text-2xl font-bold mb-6">Admin Settings</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-100">Admin Settings</h2>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-6 border-b border-gray-200">
+      <div className="flex gap-2 mb-6 border-b border-gray-700">
         <button
           onClick={() => setActiveTab("password")}
           className={`flex items-center gap-2 px-4 py-3 font-semibold transition-colors ${
             activeTab === "password"
-              ? "text-teal-600 border-b-2 border-teal-600"
-              : "text-gray-600 hover:text-teal-600"
+              ? "text-blue-400 border-b-2 border-blue-500"
+              : "text-gray-400 hover:text-blue-400"
           }`}
         >
           <FaLock />
@@ -227,8 +258,8 @@ const AdminSettings = () => {
           onClick={() => setActiveTab("company")}
           className={`flex items-center gap-2 px-4 py-3 font-semibold transition-colors ${
             activeTab === "company"
-              ? "text-teal-600 border-b-2 border-teal-600"
-              : "text-gray-600 hover:text-teal-600"
+              ? "text-blue-400 border-b-2 border-blue-500"
+              : "text-gray-400 hover:text-blue-400"
           }`}
         >
           <FaBuilding />
@@ -238,8 +269,8 @@ const AdminSettings = () => {
           onClick={() => setActiveTab("leave")}
           className={`flex items-center gap-2 px-4 py-3 font-semibold transition-colors ${
             activeTab === "leave"
-              ? "text-teal-600 border-b-2 border-teal-600"
-              : "text-gray-600 hover:text-teal-600"
+              ? "text-blue-400 border-b-2 border-blue-500"
+              : "text-gray-400 hover:text-blue-400"
           }`}
         >
           <FaCalendarAlt />
@@ -248,11 +279,11 @@ const AdminSettings = () => {
       </div>
 
       {/* Tab Content */}
-      <div className="bg-white rounded-xl shadow-lg p-8">
+      <div className="bg-[#242b35] rounded-xl shadow-lg p-8 border border-gray-700/50">
         {/* Password Change Tab */}
         {activeTab === "password" && (
           <div className="max-w-2xl mx-auto">
-            <h3 className="text-xl font-semibold text-gray-800 mb-6 text-center">
+            <h3 className="text-xl font-semibold text-gray-100 mb-6 text-center">
               Change Admin Password
             </h3>
 
@@ -260,7 +291,7 @@ const AdminSettings = () => {
               <div>
                 <label
                   htmlFor="currentPassword"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-300 mb-2"
                 >
                   Current Password
                 </label>
@@ -271,7 +302,7 @@ const AdminSettings = () => {
                   value={passwordData.currentPassword}
                   onChange={handlePasswordChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="Enter current password"
                 />
               </div>
@@ -279,7 +310,7 @@ const AdminSettings = () => {
               <div>
                 <label
                   htmlFor="newPassword"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-300 mb-2"
                 >
                   New Password
                 </label>
@@ -290,7 +321,7 @@ const AdminSettings = () => {
                   value={passwordData.newPassword}
                   onChange={handlePasswordChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="Enter new password (min. 6 characters)"
                 />
               </div>
@@ -298,7 +329,7 @@ const AdminSettings = () => {
               <div>
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-300 mb-2"
                 >
                   Confirm New Password
                 </label>
@@ -309,7 +340,7 @@ const AdminSettings = () => {
                   value={passwordData.confirmPassword}
                   onChange={handlePasswordChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="Confirm new password"
                 />
               </div>
@@ -318,7 +349,7 @@ const AdminSettings = () => {
                 <button
                   type="submit"
                   disabled={passwordLoading}
-                  className={`w-full bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${
+                  className={`w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${
                     passwordLoading
                       ? "opacity-50 cursor-not-allowed transform-none"
                       : ""
@@ -329,11 +360,11 @@ const AdminSettings = () => {
               </div>
             </form>
 
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-              <h4 className="text-sm font-semibold text-gray-700 mb-2">
+            <div className="mt-6 p-4 bg-[#1a1f26] border border-gray-700/50 rounded-lg">
+              <h4 className="text-sm font-semibold text-gray-300 mb-2">
                 Password Requirements:
               </h4>
-              <ul className="text-sm text-gray-600 space-y-1">
+              <ul className="text-sm text-gray-400 space-y-1">
                 <li>• Minimum 6 characters long</li>
                 <li>• Use a unique password you haven't used before</li>
                 <li>• Don't share your password with anyone</li>
@@ -346,13 +377,13 @@ const AdminSettings = () => {
         {activeTab === "company" && (
           <div>
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-gray-800">
+              <h3 className="text-xl font-semibold text-gray-100">
                 Company Information
               </h3>
               {!isEditingCompany && companySaved && (
                 <button
                   onClick={() => setIsEditingCompany(true)}
-                  className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
+                  className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
                 >
                   <FaEdit />
                   Edit
@@ -364,46 +395,46 @@ const AdminSettings = () => {
               // View Mode
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Company Name
                   </label>
-                  <p className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-800">
+                  <p className="px-4 py-3 bg-[#1a1f26] border border-gray-700/50 rounded-lg text-gray-200">
                     {companyData.companyName}
                   </p>
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Address
                   </label>
-                  <p className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-800 whitespace-pre-line">
+                  <p className="px-4 py-3 bg-[#1a1f26] border border-gray-700/50 rounded-lg text-gray-200 whitespace-pre-line">
                     {companyData.address}
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Phone Number
                   </label>
-                  <p className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-800">
+                  <p className="px-4 py-3 bg-[#1a1f26] border border-gray-700/50 rounded-lg text-gray-200">
                     {companyData.phone}
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Email Address
                   </label>
-                  <p className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-800">
+                  <p className="px-4 py-3 bg-[#1a1f26] border border-gray-700/50 rounded-lg text-gray-200">
                     {companyData.email}
                   </p>
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Website
                   </label>
-                  <p className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-800">
+                  <p className="px-4 py-3 bg-[#1a1f26] border border-gray-700/50 rounded-lg text-gray-200">
                     {companyData.website || "Not specified"}
                   </p>
                 </div>
@@ -414,7 +445,7 @@ const AdminSettings = () => {
               <div className="md:col-span-2">
                 <label
                   htmlFor="companyName"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-300 mb-2"
                 >
                   Company Name
                 </label>
@@ -425,7 +456,7 @@ const AdminSettings = () => {
                   value={companyData.companyName}
                   onChange={handleCompanyChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="Enter company name"
                 />
               </div>
@@ -433,7 +464,7 @@ const AdminSettings = () => {
               <div className="md:col-span-2">
                 <label
                   htmlFor="address"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-300 mb-2"
                 >
                   Address
                 </label>
@@ -444,7 +475,7 @@ const AdminSettings = () => {
                   onChange={handleCompanyChange}
                   required
                   rows="3"
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="Enter company address"
                 />
               </div>
@@ -452,7 +483,7 @@ const AdminSettings = () => {
               <div>
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-300 mb-2"
                 >
                   Phone Number
                 </label>
@@ -463,7 +494,7 @@ const AdminSettings = () => {
                   value={companyData.phone}
                   onChange={handleCompanyChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="Enter phone number"
                 />
               </div>
@@ -471,7 +502,7 @@ const AdminSettings = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-300 mb-2"
                 >
                   Email Address
                 </label>
@@ -482,7 +513,7 @@ const AdminSettings = () => {
                   value={companyData.email}
                   onChange={handleCompanyChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="Enter email address"
                 />
               </div>
@@ -490,7 +521,7 @@ const AdminSettings = () => {
               <div className="md:col-span-2">
                 <label
                   htmlFor="website"
-                  className="block text-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-300 mb-2"
                 >
                   Website
                 </label>
@@ -500,7 +531,7 @@ const AdminSettings = () => {
                   name="website"
                   value={companyData.website}
                   onChange={handleCompanyChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="https://example.com"
                 />
               </div>
@@ -509,7 +540,7 @@ const AdminSettings = () => {
                 <button
                   type="submit"
                   disabled={companyLoading}
-                  className={`flex-1 bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${
+                  className={`flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${
                     companyLoading
                       ? "opacity-50 cursor-not-allowed transform-none"
                       : ""
@@ -520,7 +551,7 @@ const AdminSettings = () => {
                 <button
                   type="button"
                   onClick={() => setIsEditingCompany(false)}
-                  className="px-6 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition-colors"
+                  className="px-6 bg-gray-600 text-gray-200 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
                 >
                   Cancel
                 </button>
@@ -534,13 +565,13 @@ const AdminSettings = () => {
         {activeTab === "leave" && (
           <div>
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-gray-800">
+              <h3 className="text-xl font-semibold text-gray-100">
                 Configure Leave Types
               </h3>
               {!isEditingLeaveTypes && leaveTypesSaved && (
                 <button
                   onClick={() => setIsEditingLeaveTypes(true)}
-                  className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
+                  className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
                 >
                   <FaEdit />
                   Edit
@@ -556,39 +587,39 @@ const AdminSettings = () => {
                     key={index}
                     className={`flex items-center justify-between p-4 border-2 rounded-lg ${
                       leave.enabled
-                        ? "border-teal-200 bg-teal-50"
-                        : "border-gray-200 bg-gray-50"
+                        ? "border-blue-600/30 bg-blue-600/10"
+                        : "border-gray-700/50 bg-[#1a1f26]"
                     }`}
                   >
                     <div className="flex items-center gap-4 flex-1">
                       <div
                         className={`w-3 h-3 rounded-full ${
-                          leave.enabled ? "bg-teal-600" : "bg-gray-400"
+                          leave.enabled ? "bg-blue-500" : "bg-gray-600"
                         }`}
                       />
                       <div>
-                        <p className="text-lg font-semibold text-gray-800">
+                        <p className="text-lg font-semibold text-gray-200">
                           {leave.type}
                         </p>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-400">
                           {leave.enabled ? "Enabled" : "Disabled"}
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-teal-600">
+                      <p className="text-2xl font-bold text-blue-400">
                         {leave.maxDays}
                       </p>
-                      <p className="text-sm text-gray-600">days/year</p>
+                      <p className="text-sm text-gray-400">days/year</p>
                     </div>
                   </div>
                 ))}
 
-                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="text-sm font-semibold text-blue-800 mb-2">
+                <div className="mt-6 p-4 bg-blue-600/10 border border-blue-600/30 rounded-lg">
+                  <h4 className="text-sm font-semibold text-blue-400 mb-2">
                     Note:
                   </h4>
-                  <p className="text-sm text-blue-700">
+                  <p className="text-sm text-gray-300">
                     Disabled leave types will not appear in the employee leave application
                     form. Maximum days per year defines the limit for each leave type.
                   </p>
@@ -601,7 +632,7 @@ const AdminSettings = () => {
                 {leaveTypes.map((leave, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:border-teal-500 transition-colors"
+                    className="flex items-center gap-4 p-4 border border-gray-700/50 rounded-lg hover:border-blue-500 transition-colors bg-[#1a1f26]"
                   >
                     <div className="flex items-center">
                       <input
@@ -610,12 +641,12 @@ const AdminSettings = () => {
                         onChange={(e) =>
                           handleLeaveTypeChange(index, "enabled", e.target.checked)
                         }
-                        className="w-5 h-5 text-teal-600 rounded focus:ring-2 focus:ring-teal-500"
+                        className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
 
                     <div className="flex-1">
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-300">
                         Leave Type
                       </label>
                       <input
@@ -625,12 +656,12 @@ const AdminSettings = () => {
                           handleLeaveTypeChange(index, "type", e.target.value)
                         }
                         disabled={!leave.enabled}
-                        className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out disabled:bg-gray-100 disabled:text-gray-500"
+                        className="mt-1 block w-full bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out disabled:bg-gray-800 disabled:text-gray-600"
                       />
                     </div>
 
                     <div className="w-40">
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-300">
                         Max Days/Year
                       </label>
                       <input
@@ -645,7 +676,7 @@ const AdminSettings = () => {
                         }
                         disabled={!leave.enabled}
                         min="1"
-                        className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out disabled:bg-gray-100 disabled:text-gray-500"
+                        className="mt-1 block w-full bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out disabled:bg-gray-800 disabled:text-gray-600"
                       />
                     </div>
                   </div>
@@ -655,24 +686,24 @@ const AdminSettings = () => {
               <div className="pt-4 flex gap-4">
                 <button
                   type="submit"
-                  className="flex-1 bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
+                  className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
                 >
                   Save Leave Configuration
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsEditingLeaveTypes(false)}
-                  className="px-6 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition-colors"
+                  className="px-6 bg-gray-600 text-gray-200 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
                 >
                   Cancel
                 </button>
               </div>
 
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <h4 className="text-sm font-semibold text-blue-800 mb-2">
+              <div className="mt-6 p-4 bg-blue-600/10 border border-blue-600/30 rounded-lg">
+                <h4 className="text-sm font-semibold text-blue-400 mb-2">
                   Note:
                 </h4>
-                <p className="text-sm text-blue-700">
+                <p className="text-sm text-gray-300">
                   Disabled leave types will not appear in the employee leave application
                   form. Maximum days per year defines the limit for each leave type.
                 </p>
