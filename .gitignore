@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Other projects (not part of EMS)
+book-review-application/
+medical-appointment-system/
+fra/
+sra/
+*.zip
+*.ps1
+*.html
+*.jpg
+*.avif
+*.webp
+*.cjs
