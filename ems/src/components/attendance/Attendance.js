@@ -162,47 +162,20 @@ const Attendance = () => {
     );
   };
 
-  // Keep the old toast system for other notifications in this file
-  const handleDeleteOld = async (id) => {
-    try {
-      const response = await axios.delete(
-        `/api/attendance/${id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      if (response.data.success) {
-        setToast({
-          show: true,
-          message: "Attendance record deleted successfully",
-          type: "success",
-        });
-        fetchAttendance();
-      }
-    } catch (error) {
-      setToast({
-        show: true,
-        message: error.response?.data?.error || "Failed to delete record",
-        type: "error",
-      });
-    }
-  };
-
   const getStatusBadge = (status) => {
     const badges = {
-      Present: "bg-green-100 text-green-800 border-green-300",
-      Absent: "bg-red-100 text-red-800 border-red-300",
-      Late: "bg-yellow-100 text-yellow-800 border-yellow-300",
-      "Half-Day": "bg-blue-100 text-blue-800 border-blue-300",
-      "Work from Home": "bg-purple-100 text-purple-800 border-purple-300",
-      "On Leave": "bg-gray-100 text-gray-800 border-gray-300",
+      Present: "bg-green-700/30 text-green-300 border-green-600/50",
+      Absent: "bg-red-700/30 text-red-300 border-red-600/50",
+      Late: "bg-yellow-700/30 text-yellow-300 border-yellow-600/50",
+      "Half-Day": "bg-blue-700/30 text-blue-300 border-blue-600/50",
+      "Work from Home": "bg-purple-700/30 text-purple-300 border-purple-600/50",
+      "On Leave": "bg-gray-700/30 text-gray-300 border-gray-600/50",
     };
 
     return (
       <span
         className={`px-3 py-1 rounded-full text-xs font-semibold border ${
-          badges[status] || "bg-gray-100 text-gray-800"
+          badges[status] || "bg-gray-700/30 text-gray-300"
         }`}
       >
         {status}
@@ -254,7 +227,7 @@ const Attendance = () => {
       cell: (row) => (
         <button
           onClick={() => handleDelete(row._id)}
-          className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-[#242b35]"
         >
           Delete
         </button>
@@ -274,9 +247,9 @@ const Attendance = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-lg p-6">
+      <div className="bg-[#242b35] rounded-xl shadow-lg p-6 border border-gray-700/50">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="text-2xl font-bold text-gray-100">
             Attendance Management
           </h2>
         </div>
@@ -287,12 +260,12 @@ const Attendance = () => {
             placeholder="Search by name, ID, or status..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className="bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
           />
 
           <button
             onClick={() => setShowModal(true)}
-            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 h-[42px] transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 h-[42px] transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#242b35]"
           >
             Mark Attendance
           </button>
@@ -300,27 +273,61 @@ const Attendance = () => {
 
         {loading ? (
           <div className="flex items-center justify-center h-48">
-            <p className="text-gray-500">Loading...</p>
+            <p className="text-gray-400">Loading...</p>
           </div>
         ) : (
           <DataTable
             columns={columns}
             data={filteredRecords}
             pagination
-            highlightOnHover
             responsive
             customStyles={{
+              table: {
+                style: {
+                  backgroundColor: "#242b35",
+                  color: "#e5e7eb",
+                },
+              },
               headRow: {
                 style: {
-                  backgroundColor: "#f9fafb",
-                  borderBottom: "2px solid #e5e7eb",
+                  backgroundColor: "#1a1f26",
+                  borderBottom: "2px solid #374151",
+                  minHeight: "52px",
                 },
               },
               headCells: {
                 style: {
                   fontSize: "14px",
                   fontWeight: "600",
-                  color: "#374151",
+                  color: "#9ca3af",
+                },
+              },
+              rows: {
+                style: {
+                  backgroundColor: "#242b35",
+                  borderBottom: "1px solid #374151",
+                  color: "#e5e7eb",
+                  "&:hover": {
+                    backgroundColor: "#2d3748",
+                  },
+                },
+              },
+              cells: {
+                style: {
+                  color: "#e5e7eb",
+                },
+              },
+              pagination: {
+                style: {
+                  backgroundColor: "#1a1f26",
+                  borderTop: "1px solid #374151",
+                  color: "#e5e7eb",
+                },
+                pageButtonsStyle: {
+                  fill: "#9ca3af",
+                  "&:hover": {
+                    fill: "#3b82f6",
+                  },
                 },
               },
             }}
@@ -329,16 +336,16 @@ const Attendance = () => {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+          <div className="bg-[#242b35] border border-gray-700/50 rounded-xl shadow-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <h3 className="text-2xl font-bold text-gray-100 mb-6">
               Mark Attendance
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-300 font-medium mb-2">
                     Employee
                   </label>
                   <select
@@ -346,7 +353,7 @@ const Attendance = () => {
                     value={formData.employeeId}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-[#1a1f26] border border-gray-600 text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="">Select Employee</option>
                     {employees.map((emp) => (
@@ -358,7 +365,7 @@ const Attendance = () => {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-300 font-medium mb-2">
                     Date
                   </label>
                   <input
@@ -367,12 +374,12 @@ const Attendance = () => {
                     value={formData.date}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-[#1a1f26] border border-gray-600 text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-300 font-medium mb-2">
                     Status
                   </label>
                   <select
@@ -380,7 +387,7 @@ const Attendance = () => {
                     value={formData.status}
                     onChange={handleInputChange}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-[#1a1f26] border border-gray-600 text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="Present">Present</option>
                     <option value="Absent">Absent</option>
@@ -392,7 +399,7 @@ const Attendance = () => {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-300 font-medium mb-2">
                     Time In
                   </label>
                   <input
@@ -400,12 +407,12 @@ const Attendance = () => {
                     name="timeIn"
                     value={formData.timeIn}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-[#1a1f26] border border-gray-600 text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-300 font-medium mb-2">
                     Time Out
                   </label>
                   <input
@@ -413,12 +420,12 @@ const Attendance = () => {
                     name="timeOut"
                     value={formData.timeOut}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-[#1a1f26] border border-gray-600 text-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-300 font-medium mb-2">
                     Remarks
                   </label>
                   <textarea
@@ -426,7 +433,7 @@ const Attendance = () => {
                     value={formData.remarks}
                     onChange={handleInputChange}
                     rows="3"
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Optional remarks..."
                   />
                 </div>
@@ -436,13 +443,13 @@ const Attendance = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                  className="bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-[#242b35]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#242b35]"
                 >
                   Submit
                 </button>

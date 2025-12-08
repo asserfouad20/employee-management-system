@@ -41,14 +41,14 @@ const View = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <span className="text-2xl font-bold">Loading…</span>
+        <span className="text-2xl font-bold text-gray-300">Loading…</span>
       </div>
     );
   }
 
   if (!employee) {
     return (
-      <div className="pt-10 text-center text-red-600">Employee not found.</div>
+      <div className="pt-10 text-center text-red-400">Employee not found.</div>
     );
   }
 
@@ -57,15 +57,15 @@ const View = () => {
       {/* Back button */}
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        className="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0f1419]"
       >
         <FaArrowLeft className="mr-2" />
         Back to Employees
       </button>
 
       {/* Details card */}
-      <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-2xl">
-        <h2 className="text-2xl font-bold mb-8 text-center">
+      <div className="max-w-3xl mx-auto bg-[#242b35] p-8 rounded-2xl shadow-2xl border border-gray-700/50">
+        <h2 className="text-2xl font-bold mb-8 text-center text-gray-100">
           Employee Details
         </h2>
 
@@ -82,41 +82,41 @@ const View = () => {
           {/* Details List */}
           <div className="space-y-4">
             <div className="flex space-x-3">
-              <p className="text-lg font-bold">Name:</p>
-              <p className="font-medium">{employee.userId.name}</p>
+              <p className="text-lg font-bold text-gray-300">Name:</p>
+              <p className="font-medium text-gray-200">{employee.userId.name}</p>
             </div>
 
             <div className="flex space-x-3">
-              <p className="text-lg font-bold">Employee ID:</p>
-              <p className="font-medium">{employee.employeeId}</p>
+              <p className="text-lg font-bold text-gray-300">Employee ID:</p>
+              <p className="font-medium text-gray-200">{employee.employeeId}</p>
             </div>
             <div className="flex space-x-3">
-              <p className="text-lg font-bold">Department:</p>
-              <p className="font-medium">{employee.department.dep_name}</p>
+              <p className="text-lg font-bold text-gray-300">Department:</p>
+              <p className="font-medium text-gray-200">{employee.department.dep_name}</p>
             </div>
             <div className="flex space-x-3">
-              <p className="text-lg font-bold">Designation:</p>
-              <p className="font-medium">{employee.designation}</p>
+              <p className="text-lg font-bold text-gray-300">Designation:</p>
+              <p className="font-medium text-gray-200">{employee.designation}</p>
             </div>
             <div className="flex space-x-3">
-              <p className="text-lg font-bold">Salary In USD:</p>
-              <p className="font-medium">${employee.salary.toLocaleString()}</p>
+              <p className="text-lg font-bold text-gray-300">Salary In USD:</p>
+              <p className="font-medium text-gray-200">${employee.salary.toLocaleString()}</p>
             </div>
             <div className="flex space-x-3">
-              <p className="text-lg font-bold">Date Of Birth:</p>
-              <p className="font-medium">
+              <p className="text-lg font-bold text-gray-300">Date Of Birth:</p>
+              <p className="font-medium text-gray-200">
                 {new Date(employee.dob).toLocaleDateString()}
               </p>
             </div>
 
             <div className="flex space-x-3">
-              <p className="text-lg font-bold">Gender:</p>
-              <p className="font-medium">{employee.gender}</p>
+              <p className="text-lg font-bold text-gray-300">Gender:</p>
+              <p className="font-medium text-gray-200">{employee.gender}</p>
             </div>
 
             <div className="flex space-x-3">
-              <p className="text-lg font-bold">Marital Status:</p>
-              <p className="font-medium">{employee.maritalStatus}</p>
+              <p className="text-lg font-bold text-gray-300">Marital Status:</p>
+              <p className="font-medium text-gray-200">{employee.maritalStatus}</p>
             </div>
           </div>
         </div>

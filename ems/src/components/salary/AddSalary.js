@@ -88,11 +88,13 @@ export default function AddSalary() {
       setSubmitting(false);
     }
   };
-  const inputStyles = `mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out`;
-  // 5️⃣ The actual return at component level:
+
+  const inputClasses = "mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out";
+  const labelClasses = "block text-sm font-medium text-gray-300";
+
   return (
-    <div className="max-w-4xl mx-auto mt-20 bg-white p-8 rounded-3xl shadow-2xl">
-      <h2 className="text-2xl font-bold mb-6">Add Salary</h2>
+    <div className="max-w-4xl mx-auto mt-20 bg-[#242b35] p-8 rounded-3xl shadow-2xl border border-gray-700/50">
+      <h2 className="text-2xl font-bold mb-6 text-gray-100">Add Salary</h2>
 
       <form
         onSubmit={handleSubmit}
@@ -100,7 +102,7 @@ export default function AddSalary() {
       >
         {/* Department */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className={labelClasses}>
             Department
           </label>
           <select
@@ -108,7 +110,7 @@ export default function AddSalary() {
             value={form.department}
             onChange={handleDepartment}
             required
-            className={inputStyles}
+            className={inputClasses}
           >
             <option value="">Select Department</option>
             {departments.map((dep) => (
@@ -121,7 +123,7 @@ export default function AddSalary() {
 
         {/* Employee */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className={labelClasses}>
             Employee
           </label>
           <select
@@ -129,7 +131,7 @@ export default function AddSalary() {
             value={form.employee}
             onChange={handleChange}
             required
-            className={inputStyles}
+            className={inputClasses}
           >
             <option value="">Select Employee</option>
             {employees.map((emp) => (
@@ -142,7 +144,7 @@ export default function AddSalary() {
 
         {/* Basic Salary */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className={labelClasses}>
             Basic Salary
           </label>
           <input
@@ -152,13 +154,13 @@ export default function AddSalary() {
             value={form.basicSalary}
             onChange={handleChange}
             required
-            className={inputStyles}
+            className={inputClasses}
           />
         </div>
 
         {/* Allowances */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className={labelClasses}>
             Allowances
           </label>
           <input
@@ -168,13 +170,13 @@ export default function AddSalary() {
             value={form.allowances}
             onChange={handleChange}
             required
-            className={inputStyles}
+            className={inputClasses}
           />
         </div>
 
         {/* Deductions */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className={labelClasses}>
             Deductions
           </label>
           <input
@@ -184,13 +186,13 @@ export default function AddSalary() {
             value={form.deductions}
             onChange={handleChange}
             required
-            className={inputStyles}
+            className={inputClasses}
           />
         </div>
 
         {/* Pay Date */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className={labelClasses}>
             Pay Date
           </label>
           <input
@@ -199,7 +201,7 @@ export default function AddSalary() {
             value={form.payDate}
             onChange={handleChange}
             required
-            className={inputStyles}
+            className={inputClasses}
           />
         </div>
 
@@ -207,14 +209,14 @@ export default function AddSalary() {
         <div className="md:col-span-3 flex justify-center items-center space-x-6 mt-6">
           <Link
             to="/admin-dashboard/employees"
-            className="text-teal-600 hover:underline transition-colors duration-200 ease-in-out"
+            className="text-blue-400 hover:text-blue-300 hover:underline focus:outline-none transition-all duration-200 ease-in-out"
           >
             ← Back to Employees
           </Link>
           <button
             type="submit"
             disabled={submitting}
-            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#242b35] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             {submitting ? "Saving…" : "Save Salary"}
           </button>

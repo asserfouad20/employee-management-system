@@ -28,7 +28,7 @@ const Summary = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <span className="text-3xl font-bold text-black">Loading...</span>
+        <span className="text-3xl font-bold text-gray-300">Loading...</span>
       </div>
     );
   }
@@ -36,81 +36,81 @@ const Summary = () => {
   if (!employee) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <span className="text-xl text-red-600">Unable to load employee data</span>
+        <span className="text-xl text-red-400">Unable to load employee data</span>
       </div>
     );
   }
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-6">Dashboard</h2>
+      <h2 className="text-3xl font-bold mb-6 text-gray-100">Dashboard</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-xl shadow-lg p-6 flex items-center space-x-4">
-          <div className="bg-blue-100 p-4 rounded-full">
-            <FaUser className="text-blue-600 text-2xl" />
+        <div className="bg-[#242b35] border border-gray-700/50 rounded-xl shadow-lg p-6 flex items-center space-x-4">
+          <div className="bg-blue-600/20 p-4 rounded-full border border-blue-600/30">
+            <FaUser className="text-blue-400 text-2xl" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm">Employee ID</p>
-            <p className="text-2xl font-bold">{employee.employeeId}</p>
+            <p className="text-gray-400 text-sm">Employee ID</p>
+            <p className="text-2xl font-bold text-gray-100">{employee.employeeId}</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg p-6 flex items-center space-x-4">
-          <div className="bg-green-100 p-4 rounded-full">
-            <FaMoneyBillWave className="text-green-600 text-2xl" />
+        <div className="bg-[#242b35] border border-gray-700/50 rounded-xl shadow-lg p-6 flex items-center space-x-4">
+          <div className="bg-green-600/20 p-4 rounded-full border border-green-600/30">
+            <FaMoneyBillWave className="text-green-400 text-2xl" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm">Salary</p>
-            <p className="text-2xl font-bold">${employee.salary?.toLocaleString()}</p>
+            <p className="text-gray-400 text-sm">Salary</p>
+            <p className="text-2xl font-bold text-gray-100">${employee.salary?.toLocaleString()}</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg p-6 flex items-center space-x-4">
-          <div className="bg-purple-100 p-4 rounded-full">
-            <FaBuilding className="text-purple-600 text-2xl" />
+        <div className="bg-[#242b35] border border-gray-700/50 rounded-xl shadow-lg p-6 flex items-center space-x-4">
+          <div className="bg-purple-600/20 p-4 rounded-full border border-purple-600/30">
+            <FaBuilding className="text-purple-400 text-2xl" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm">Department</p>
-            <p className="text-xl font-bold">{employee.department?.dep_name || "N/A"}</p>
+            <p className="text-gray-400 text-sm">Department</p>
+            <p className="text-xl font-bold text-gray-100">{employee.department?.dep_name || "N/A"}</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg p-6 flex items-center space-x-4">
-          <div className="bg-orange-100 p-4 rounded-full">
-            <FaCalendarAlt className="text-orange-600 text-2xl" />
+        <div className="bg-[#242b35] border border-gray-700/50 rounded-xl shadow-lg p-6 flex items-center space-x-4">
+          <div className="bg-orange-600/20 p-4 rounded-full border border-orange-600/30">
+            <FaCalendarAlt className="text-orange-400 text-2xl" />
           </div>
           <div>
-            <p className="text-gray-500 text-sm">Designation</p>
-            <p className="text-xl font-bold">{employee.designation || "N/A"}</p>
+            <p className="text-gray-400 text-sm">Designation</p>
+            <p className="text-xl font-bold text-gray-100">{employee.designation || "N/A"}</p>
           </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg p-6">
-        <h3 className="text-2xl font-bold mb-4">Personal Information</h3>
+      <div className="bg-[#242b35] border border-gray-700/50 rounded-xl shadow-lg p-6">
+        <h3 className="text-2xl font-bold mb-4 text-gray-100">Personal Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <p className="text-gray-500 text-sm">Full Name</p>
-            <p className="text-lg font-semibold">{employee.userId?.name}</p>
+            <p className="text-gray-400 text-sm">Full Name</p>
+            <p className="text-lg font-semibold text-gray-200">{employee.userId?.name}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-sm">Email</p>
-            <p className="text-lg font-semibold">{employee.userId?.email}</p>
+            <p className="text-gray-400 text-sm">Email</p>
+            <p className="text-lg font-semibold text-gray-200">{employee.userId?.email}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-sm">Date of Birth</p>
-            <p className="text-lg font-semibold">
+            <p className="text-gray-400 text-sm">Date of Birth</p>
+            <p className="text-lg font-semibold text-gray-200">
               {employee.dob ? new Date(employee.dob).toLocaleDateString() : "N/A"}
             </p>
           </div>
           <div>
-            <p className="text-gray-500 text-sm">Gender</p>
-            <p className="text-lg font-semibold">{employee.gender || "N/A"}</p>
+            <p className="text-gray-400 text-sm">Gender</p>
+            <p className="text-lg font-semibold text-gray-200">{employee.gender || "N/A"}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-sm">Marital Status</p>
-            <p className="text-lg font-semibold">{employee.maritalStatus || "N/A"}</p>
+            <p className="text-gray-400 text-sm">Marital Status</p>
+            <p className="text-lg font-semibold text-gray-200">{employee.maritalStatus || "N/A"}</p>
           </div>
         </div>
       </div>

@@ -95,18 +95,19 @@ export default function AddEmployee() {
     }
   };
 
+  const inputClasses = "mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out";
+  const labelClasses = "block text-sm font-medium text-gray-300";
+
   return (
-    <div className="max-w-4xl mx-auto mt-20 bg-white p-8 rounded-3xl shadow-2xl">
-      <h2 className="text-2xl font-bold mb-6">Add New Employee</h2>
+    <div className="max-w-4xl mx-auto mt-20 bg-[#242b35] p-8 rounded-3xl shadow-2xl border border-gray-700/50">
+      <h2 className="text-2xl font-bold mb-6 text-gray-100">Add New Employee</h2>
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 md:grid-cols-3 gap-6"
       >
         {/* Name */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Name
-          </label>
+          <label className={labelClasses}>Name</label>
           <input
             name="name"
             type="text"
@@ -114,14 +115,12 @@ export default function AddEmployee() {
             value={form.name}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Email
-          </label>
+          <label className={labelClasses}>Email</label>
           <input
             name="email"
             type="email"
@@ -129,14 +128,12 @@ export default function AddEmployee() {
             value={form.email}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         {/* Employee ID */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Employee ID
-          </label>
+          <label className={labelClasses}>Employee ID</label>
           <input
             name="employeeId"
             type="text"
@@ -144,34 +141,30 @@ export default function AddEmployee() {
             value={form.employeeId}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         {/* Date of Birth */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Date of Birth
-          </label>
+          <label className={labelClasses}>Date of Birth</label>
           <input
             name="dob"
             type="date"
             value={form.dob}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         {/* Gender */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Gender
-          </label>
+          <label className={labelClasses}>Gender</label>
           <select
             name="gender"
             value={form.gender}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           >
             <option value="">Select Gender</option>
             <option>Male</option>
@@ -180,14 +173,12 @@ export default function AddEmployee() {
         </div>
         {/* Marital Status */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Marital Status
-          </label>
+          <label className={labelClasses}>Marital Status</label>
           <select
             name="maritalStatus"
             value={form.maritalStatus}
             onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           >
             <option value="">Select Status</option>
             <option>Single</option>
@@ -197,28 +188,24 @@ export default function AddEmployee() {
         </div>
         {/* Designation */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Designation
-          </label>
+          <label className={labelClasses}>Designation</label>
           <input
             name="designation"
             type="text"
             placeholder="Designation"
             value={form.designation}
             onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         {/* Department */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Department
-          </label>
+          <label className={labelClasses}>Department</label>
           <select
             name="department"
             value={form.department}
             onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           >
             <option value="">Select Department</option>
             {departments.map((dep) => (
@@ -230,29 +217,25 @@ export default function AddEmployee() {
         </div>
         {/* Salary */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Salary
-          </label>
+          <label className={labelClasses}>Salary</label>
           <input
             name="salary"
             type="number"
             placeholder="Salary In USD"
             value={form.salary}
             onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         {/* Role */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Role
-          </label>
+          <label className={labelClasses}>Role</label>
           <select
             name="role"
             value={form.role}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           >
             <option value="">Select Role</option>
             <option value="admin">Admin</option>
@@ -261,9 +244,7 @@ export default function AddEmployee() {
         </div>
         {/* Password */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Password
-          </label>
+          <label className={labelClasses}>Password</label>
           <input
             name="password"
             type="password"
@@ -273,12 +254,12 @@ export default function AddEmployee() {
             required
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
             title="Must be at least 8 characters, and include uppercase, lowercase, number & special character"
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         {/* Profile Image */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-300 mb-1">
             Profile Image
           </label>
           <div className="flex items-center space-x-4">
@@ -292,12 +273,12 @@ export default function AddEmployee() {
             />
             <label
               htmlFor="profileImage"
-              className="inline-flex items-center justify-center px-4 py-2 bg-teal-600 text-white rounded-full hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-600 transition-colors duration-200 cursor-pointer"
+              className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg cursor-pointer"
             >
               Choose Image
             </label>
             {form.profileImage && (
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-400">
                 {form.profileImage.name}
               </span>
             )}
@@ -307,14 +288,14 @@ export default function AddEmployee() {
         <div className="md:col-span-3 flex justify-center items-center space-x-6 mt-6">
           <Link
             to="/admin-dashboard/employees"
-            className="text-teal-600 hover:underline focus:outline-none transition-all duration-200 ease-in-out"
+            className="text-blue-400 hover:text-blue-300 hover:underline focus:outline-none transition-all duration-200 ease-in-out"
           >
             ← Back to Employees
           </Link>
           <button
             type="submit"
             disabled={submitting}
-            className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#242b35] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             {submitting ? "Adding…" : "Add Employee"}
           </button>

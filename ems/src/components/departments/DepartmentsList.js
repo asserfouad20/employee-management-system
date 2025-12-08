@@ -9,16 +9,59 @@ import { FaPlus } from "react-icons/fa";
 import { showToast } from "../../utils/toast";
 
 const customStyles = {
-  headRow: { style: { borderBottom: "1px solid #e2e8f0" } },
+  table: {
+    style: {
+      backgroundColor: "#242b35",
+      color: "#e5e7eb",
+    },
+  },
+  headRow: {
+    style: {
+      backgroundColor: "#1a1f26",
+      borderBottom: "2px solid #374151",
+      minHeight: "52px",
+    },
+  },
   headCells: {
     style: {
       fontSize: "1rem",
       fontWeight: 600,
       textAlign: "left",
       paddingLeft: "1rem",
+      color: "#9ca3af",
     },
   },
-  cells: { style: { textAlign: "left", paddingLeft: "1rem" } },
+  rows: {
+    style: {
+      backgroundColor: "#242b35",
+      borderBottom: "1px solid #374151",
+      color: "#e5e7eb",
+      "&:hover": {
+        backgroundColor: "#2d3748",
+        cursor: "pointer",
+      },
+    },
+  },
+  cells: {
+    style: {
+      textAlign: "left",
+      paddingLeft: "1rem",
+      color: "#e5e7eb",
+    },
+  },
+  pagination: {
+    style: {
+      backgroundColor: "#1a1f26",
+      borderTop: "1px solid #374151",
+      color: "#e5e7eb",
+    },
+    pageButtonsStyle: {
+      fill: "#9ca3af",
+      "&:hover": {
+        fill: "#3b82f6",
+      },
+    },
+  },
 };
 
 export default function DepartmentsList() {
@@ -71,7 +114,7 @@ export default function DepartmentsList() {
     <div className="pt-5 px-6 space-y-4">
       {/* Header + Add */}
       <div className="flex justify-between items-center">
-        <h3 className="text-2xl font-bold">Manage Departments</h3>
+        <h3 className="text-2xl font-bold text-gray-100">Manage Departments</h3>
       </div>
 
       {/* Search */}
@@ -81,22 +124,11 @@ export default function DepartmentsList() {
           placeholder="Search By Dept Name"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="
-            w-46 px-4 py-2 border border-gray-300 rounded-lg
-            focus:outline-none focus:ring-2 focus:ring-teal-600
-            transition-shadow duration-200
-          "
+          className="w-46 px-4 py-2 bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
         />
         <Link
           to="/admin-dashboard/add-department"
-          className="
-    flex items-center justify-center
-    w-10 h-10
-    bg-teal-600 text-white
-    rounded-full
-    hover:bg-teal-700
-    transition-colors duration-300
-  "
+          className="flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
           aria-label="Add Department"
         >
           <FaPlus className="text-sm" />
@@ -104,7 +136,7 @@ export default function DepartmentsList() {
       </div>
 
       {/* Table */}
-      <div className="mt-5 bg-white shadow-2xl rounded-xl overflow-hidden">
+      <div className="mt-5 bg-[#242b35] shadow-2xl rounded-xl overflow-hidden border border-gray-700/50">
         <DataTable
           columns={columns}
           data={rows}
@@ -112,13 +144,13 @@ export default function DepartmentsList() {
           progressPending={loading}
           progressComponent={
             <div className="flex items-center justify-center h-48">
-              <span className="text-3xl font-bold text-black">Loading…</span>
+              <span className="text-3xl font-bold text-gray-300">Loading…</span>
             </div>
           }
           pagination
-          highlightOnHover
-          pointerOnHover
-          noDataComponent="No departments found"
+          noDataComponent={
+            <div className="p-8 text-center text-gray-400">No departments found</div>
+          }
         />
       </div>
     </div>

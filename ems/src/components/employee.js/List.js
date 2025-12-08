@@ -9,9 +9,20 @@ import {
   EmployeeButtons,
 } from "../../utils/EmployeeHelper";
 import { showToast } from "../../utils/toast";
+
 const customStyles = {
+  table: {
+    style: {
+      backgroundColor: "#242b35",
+      color: "#e5e7eb",
+    },
+  },
   headRow: {
-    style: { borderBottom: "1px solid #e2e8f0" },
+    style: {
+      backgroundColor: "#1a1f26",
+      borderBottom: "2px solid #374151",
+      minHeight: "52px",
+    },
   },
   headCells: {
     style: {
@@ -20,6 +31,18 @@ const customStyles = {
       textAlign: "left",
       paddingLeft: "1rem",
       paddingRight: "1rem",
+      color: "#9ca3af",
+    },
+  },
+  rows: {
+    style: {
+      backgroundColor: "#242b35",
+      borderBottom: "1px solid #374151",
+      color: "#e5e7eb",
+      "&:hover": {
+        backgroundColor: "#2d3748",
+        cursor: "pointer",
+      },
     },
   },
   cells: {
@@ -27,10 +50,24 @@ const customStyles = {
       textAlign: "left",
       paddingLeft: "1rem",
       paddingRight: "1rem",
+      color: "#e5e7eb",
+    },
+  },
+  pagination: {
+    style: {
+      backgroundColor: "#1a1f26",
+      borderTop: "1px solid #374151",
+      color: "#e5e7eb",
+    },
+    pageButtonsStyle: {
+      fill: "#9ca3af",
+      "&:hover": {
+        fill: "#3b82f6",
+      },
     },
   },
   columns: {
-    // Shift Action column (index 6) 0.5rem to the left
+    // Shift Action column (index 6) 0.5rem to the left
     6: {
       style: {
         paddingLeft: "70.5rem",
@@ -38,6 +75,7 @@ const customStyles = {
     },
   },
 };
+
 export default function List() {
   const [employees, setEmployees] = useState([]); // rows ready for display
   const [loading, setLoading] = useState(false);
@@ -91,7 +129,7 @@ export default function List() {
   return (
     <div className="pt-5 px-6 space-y-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-2xl font-bold">Manage Employees</h3>
+        <h3 className="text-2xl font-bold text-gray-100">Manage Employees</h3>
       </div>
 
       <div className="flex justify-between items-center">
@@ -100,30 +138,19 @@ export default function List() {
           placeholder="Search By Emp Name"
           value={searchTerm} // ← controlled input
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="
-            w-60 px-4 py-2 border border-gray-300 rounded-lg
-            focus:outline-none focus:ring-2 focus:ring-teal-600
-            transition-shadow duration-200
-          "
+          className="w-60 px-4 py-2 bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
         />
 
         <Link
           to="/admin-dashboard/add-employee"
-          className="
-    flex items-center justify-center
-    w-10 h-10
-    bg-teal-600 text-white
-    rounded-full
-    hover:bg-teal-700
-    transition-colors duration-300
-  "
+          className="flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
           aria-label="Add Employee"
         >
           <FaPlus className="text-sm" />
         </Link>
       </div>
 
-      <div className="mt-5 bg-white shadow-2xl rounded-xl overflow-hidden">
+      <div className="mt-5 bg-[#242b35] shadow-2xl rounded-xl overflow-hidden border border-gray-700/50">
         <DataTable
           columns={employeeColumns}
           data={filteredEmployees}
@@ -131,13 +158,13 @@ export default function List() {
           progressPending={loading}
           progressComponent={
             <div className="flex items-center justify-center h-48">
-              <span className="text-3xl font-bold text-black">Loading…</span>
+              <span className="text-3xl font-bold text-gray-300">Loading…</span>
             </div>
           }
           pagination
-          highlightOnHover
-          pointerOnHover
-          noDataComponent="No employees found"
+          noDataComponent={
+            <div className="p-8 text-center text-gray-400">No employees found</div>
+          }
         />
       </div>
     </div>

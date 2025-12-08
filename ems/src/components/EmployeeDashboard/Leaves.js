@@ -20,16 +20,58 @@ const Leaves = () => {
   });
 
   const customStyles = {
-    headRow: { style: { borderBottom: "1px solid #e2e8f0" } },
+    table: {
+      style: {
+        backgroundColor: "#242b35",
+        color: "#e5e7eb",
+      },
+    },
+    headRow: {
+      style: {
+        backgroundColor: "#1a1f26",
+        borderBottom: "2px solid #374151",
+        minHeight: "52px",
+      },
+    },
     headCells: {
       style: {
-        fontSize: "1rem",
-        fontWeight: 600,
+        fontSize: "14px",
+        fontWeight: "600",
+        color: "#9ca3af",
         textAlign: "left",
         paddingLeft: "1rem",
       },
     },
-    cells: { style: { textAlign: "left", paddingLeft: "1rem" } },
+    rows: {
+      style: {
+        backgroundColor: "#242b35",
+        borderBottom: "1px solid #374151",
+        color: "#e5e7eb",
+        "&:hover": {
+          backgroundColor: "#2d3748",
+        },
+      },
+    },
+    cells: {
+      style: {
+        color: "#e5e7eb",
+        textAlign: "left",
+        paddingLeft: "1rem",
+      },
+    },
+    pagination: {
+      style: {
+        backgroundColor: "#1a1f26",
+        borderTop: "1px solid #374151",
+        color: "#e5e7eb",
+      },
+      pageButtonsStyle: {
+        fill: "#9ca3af",
+        "&:hover": {
+          fill: "#3b82f6",
+        },
+      },
+    },
   };
 
   const columns = [
@@ -68,12 +110,12 @@ const Leaves = () => {
       selector: (row) => row.status,
       cell: (row) => (
         <span
-          className={`px-3 py-1 rounded-full text-sm font-semibold ${
+          className={`px-3 py-1 rounded-full text-xs font-semibold border ${
             row.status === "Approved"
-              ? "bg-green-100 text-green-700"
+              ? "bg-green-700/30 text-green-300 border-green-600/50"
               : row.status === "Rejected"
-              ? "bg-red-100 text-red-700"
-              : "bg-yellow-100 text-yellow-700"
+              ? "bg-red-700/30 text-red-300 border-red-600/50"
+              : "bg-yellow-700/30 text-yellow-300 border-yellow-600/50"
           }`}
         >
           {row.status}
@@ -216,7 +258,7 @@ const Leaves = () => {
       )}
 
       {/* Header */}
-      <h2 className="text-2xl font-bold mb-6">Manage Leaves</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-100">Manage Leaves</h2>
 
       {/* Search and Add Button */}
       <div className="flex justify-between items-center mb-4">
@@ -225,44 +267,42 @@ const Leaves = () => {
           placeholder="Search By Status"
           value={searchStatus}
           onChange={(e) => setSearchStatus(e.target.value)}
-          className="mt-1 block w-64 border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+          className="mt-1 block w-64 bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
         />
         <button
           onClick={() => setShowModal(true)}
-          className="bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0f1419]"
         >
           Add Leave
         </button>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="bg-[#242b35] rounded-xl shadow-lg overflow-hidden border border-gray-700/50">
         <DataTable
           columns={columns}
           data={filteredLeaves}
           customStyles={customStyles}
           progressPending={loading}
           pagination
-          highlightOnHover
-          pointerOnHover
           noDataComponent="No leave records found"
         />
       </div>
 
       {/* Add Leave Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-3xl relative">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+          <div className="bg-[#242b35] border border-gray-700/50 rounded-3xl shadow-2xl p-8 w-full max-w-3xl relative">
             {/* Close Button */}
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-300"
             >
               <FaTimes className="text-2xl" />
             </button>
 
             {/* Modal Header */}
-            <h3 className="text-2xl font-bold mb-6">Apply for Leave</h3>
+            <h3 className="text-2xl font-bold mb-6 text-gray-100">Apply for Leave</h3>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -270,7 +310,7 @@ const Leaves = () => {
               <div>
                 <label
                   htmlFor="leaveType"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-300"
                 >
                   Leave Type
                 </label>
@@ -280,7 +320,7 @@ const Leaves = () => {
                   value={formData.leaveType}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                 >
                   <option value="">Select Leave Type</option>
                   <option value="Sick Leave">Sick Leave</option>
@@ -295,7 +335,7 @@ const Leaves = () => {
               <div>
                 <label
                   htmlFor="startDate"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-300"
                 >
                   From Date
                 </label>
@@ -306,7 +346,7 @@ const Leaves = () => {
                   value={formData.startDate}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                 />
               </div>
 
@@ -314,7 +354,7 @@ const Leaves = () => {
               <div>
                 <label
                   htmlFor="endDate"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-300"
                 >
                   To Date
                 </label>
@@ -325,7 +365,7 @@ const Leaves = () => {
                   value={formData.endDate}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                 />
               </div>
 
@@ -333,7 +373,7 @@ const Leaves = () => {
               <div className="md:col-span-2">
                 <label
                   htmlFor="reason"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-300"
                 >
                   Reason
                 </label>
@@ -344,7 +384,7 @@ const Leaves = () => {
                   onChange={handleChange}
                   required
                   rows="3"
-                  className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+                  className="mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
                   placeholder="Enter reason for leave"
                 />
               </div>
@@ -354,7 +394,7 @@ const Leaves = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className={`w-full bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${
+                  className={`w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#242b35] ${
                     submitting
                       ? "opacity-50 cursor-not-allowed transform-none"
                       : ""

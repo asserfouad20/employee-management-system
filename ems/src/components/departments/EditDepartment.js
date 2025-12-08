@@ -72,15 +72,18 @@ const EditDepartment = () => {
   };
 
   if (loading) {
-    return <div className="pt-5 text-center">Loading…</div>;
+    return <div className="pt-5 text-center text-gray-300">Loading…</div>;
   }
 
+  const inputClasses = "mt-1 block w-full bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out";
+  const labelClasses = "block font-medium mb-1 text-gray-300";
+
   return (
-    <div className="max-w-md mx-auto mt-32 p-6 bg-white rounded-xl shadow-2xl">
-      <h2 className="text-2xl font-bold mb-6 text-center">Edit Department</h2>
+    <div className="max-w-md mx-auto mt-32 p-6 bg-[#242b35] rounded-xl shadow-2xl border border-gray-700/50">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-100">Edit Department</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="dep_name" className="block font-medium mb-1">
+          <label htmlFor="dep_name" className={labelClasses}>
             Department Name
           </label>
           <input
@@ -89,11 +92,11 @@ const EditDepartment = () => {
             type="text"
             value={department.dep_name}
             onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         <div>
-          <label htmlFor="description" className="block font-medium mb-1">
+          <label htmlFor="description" className={labelClasses}>
             Description
           </label>
           <textarea
@@ -102,18 +105,18 @@ const EditDepartment = () => {
             rows={4}
             value={department.description}
             onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+            className={inputClasses}
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+          className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#242b35]"
         >
           Update
         </button>
         <Link
           to="/admin-dashboard/departments"
-          className="block mt-4 text-start text-teal-600 hover:underline transition-all duration-200 ease-in-out"
+          className="block mt-4 text-start text-blue-400 hover:text-blue-300 hover:underline transition-all duration-200 ease-in-out"
         >
           ← Back to Departments
         </Link>

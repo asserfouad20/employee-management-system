@@ -10,16 +10,58 @@ const AdminLeaves = () => {
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
 
   const customStyles = {
-    headRow: { style: { borderBottom: "1px solid #e2e8f0" } },
+    table: {
+      style: {
+        backgroundColor: "#242b35",
+        color: "#e5e7eb",
+      },
+    },
+    headRow: {
+      style: {
+        backgroundColor: "#1a1f26",
+        borderBottom: "2px solid #374151",
+        minHeight: "52px",
+      },
+    },
     headCells: {
       style: {
         fontSize: "1rem",
         fontWeight: 600,
         textAlign: "left",
         paddingLeft: "1rem",
+        color: "#9ca3af",
       },
     },
-    cells: { style: { textAlign: "left", paddingLeft: "1rem" } },
+    rows: {
+      style: {
+        backgroundColor: "#242b35",
+        borderBottom: "1px solid #374151",
+        color: "#e5e7eb",
+        "&:hover": {
+          backgroundColor: "#2d3748",
+        },
+      },
+    },
+    cells: {
+      style: {
+        textAlign: "left",
+        paddingLeft: "1rem",
+        color: "#e5e7eb",
+      },
+    },
+    pagination: {
+      style: {
+        backgroundColor: "#1a1f26",
+        borderTop: "1px solid #374151",
+        color: "#e5e7eb",
+      },
+      pageButtonsStyle: {
+        fill: "#9ca3af",
+        "&:hover": {
+          fill: "#3b82f6",
+        },
+      },
+    },
   };
 
   const columns = [
@@ -66,10 +108,10 @@ const AdminLeaves = () => {
         <span
           className={`px-3 py-1 rounded-full text-sm font-semibold ${
             row.status === "Approved"
-              ? "bg-green-100 text-green-700"
+              ? "bg-green-700/30 text-green-300 border border-green-600/50"
               : row.status === "Rejected"
-              ? "bg-red-100 text-red-700"
-              : "bg-yellow-100 text-yellow-700"
+              ? "bg-red-700/30 text-red-300 border border-red-600/50"
+              : "bg-yellow-700/30 text-yellow-300 border border-yellow-600/50"
           }`}
         >
           {row.status}
@@ -84,13 +126,13 @@ const AdminLeaves = () => {
           <div className="flex gap-2">
             <button
               onClick={() => handleUpdateStatus(row._id, "Approved")}
-              className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors"
+              className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-[#242b35]"
             >
               Approve
             </button>
             <button
               onClick={() => handleUpdateStatus(row._id, "Rejected")}
-              className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-red-700 transition-colors"
+              className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-red-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-[#242b35]"
             >
               Reject
             </button>
@@ -222,7 +264,7 @@ const AdminLeaves = () => {
       )}
 
       {/* Header */}
-      <h2 className="text-2xl font-bold mb-6">Leave Management</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-100">Leave Management</h2>
 
       {/* Search */}
       <div className="mb-4">
@@ -231,21 +273,21 @@ const AdminLeaves = () => {
           placeholder="Search by employee, leave type, or status"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="mt-1 block w-96 border border-gray-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-300 ease-in-out"
+          className="mt-1 block w-96 bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
         />
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="bg-[#242b35] rounded-xl shadow-lg overflow-hidden border border-gray-700/50">
         <DataTable
           columns={columns}
           data={filteredLeaves}
           customStyles={customStyles}
           progressPending={loading}
           pagination
-          highlightOnHover
-          pointerOnHover
-          noDataComponent="No leave requests found"
+          noDataComponent={
+            <div className="p-8 text-center text-gray-400">No leave requests found</div>
+          }
         />
       </div>
     </div>
