@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd ems && npm install && npm run build",
+  "buildCommand": "npm run build",
   "outputDirectory": "ems/build",
-  "installCommand": "cd ems && npm install",
-  "framework": null
+  "devCommand": "npm start",
+  "installCommand": "npm install"
 }
