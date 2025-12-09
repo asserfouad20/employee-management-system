@@ -54,9 +54,9 @@ const cleanOrphanedLeaves = async () => {
         console.log(`Deleted leave: ${orphaned.leaveType} - ${orphaned.reason}`);
       }
 
-      console.log(`\n✓ Successfully deleted ${orphanedCount} orphaned leave record(s)`);
+      console.log(`\nSuccessfully deleted ${orphanedCount} orphaned leave record(s)`);
     } else {
-      console.log('\n✓ No orphaned leaves found. Database is clean!');
+      console.log('\nNo orphaned leaves found. Database is clean!');
     }
 
     await mongoose.connection.close();

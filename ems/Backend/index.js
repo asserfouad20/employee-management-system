@@ -4,12 +4,12 @@ dotenv.config();
 
 // Verify JWT_KEY is loaded
 if (!process.env.JWT_KEY) {
-  console.error("❌ Missing JWT_KEY in environment variables");
-  console.error("💡 Make sure .env file exists in Backend folder with JWT_KEY defined");
+  console.error("Missing JWT_KEY in environment variables");
+  console.error("Make sure .env file exists in Backend folder with JWT_KEY defined");
   process.exit(1);
 }
 
-console.log("✅ JWT_KEY loaded successfully");
+console.log("JWT_KEY loaded successfully");
 
 import express from "express";
 import cors from "cors";
@@ -43,5 +43,5 @@ app.use("/api/attendance", attendanceRouter);
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

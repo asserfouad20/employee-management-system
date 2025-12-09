@@ -12,7 +12,7 @@ const createEmployee = async () => {
   try {
     // Connect to MongoDB
     await mongoose.connect(process.env.MONGO_URL);
-    console.log("✅ Connected to MongoDB");
+    console.log("Connected to MongoDB");
 
     // Employee credentials
     const employeeData = {
@@ -26,14 +26,14 @@ const createEmployee = async () => {
     let existingUser = await User.findOne({ email: employeeData.email });
 
     if (existingUser) {
-      console.log("⚠️  Employee user already exists. Updating password...");
+      console.log("Employee user already exists. Updating password...");
       existingUser.password = employeeData.password;
       await existingUser.save();
-      console.log("✅ Employee password updated!");
+      console.log("Employee password updated!");
     } else {
       // Create new employee user
       existingUser = await User.create(employeeData);
-      console.log("✅ Employee user created!");
+      console.log("Employee user created!");
     }
 
     // Check if we need to create an Employee record
@@ -48,7 +48,7 @@ const createEmployee = async () => {
           dep_name: "IT Department",
           description: "Information Technology",
         });
-        console.log("✅ Created IT Department");
+        console.log("Created IT Department");
       }
 
       // Create employee record
@@ -63,19 +63,19 @@ const createEmployee = async () => {
         salary: 60000,
       });
 
-      console.log("✅ Employee record created!");
+      console.log("Employee record created!");
     } else {
-      console.log("✅ Employee record already exists");
+      console.log("Employee record already exists");
     }
 
-    console.log("\n📧 Email:", employeeData.email);
-    console.log("🔑 Password:", employeeData.password);
-    console.log("👤 Employee ID:", employeeRecord.employeeId);
-    console.log("\n✨ You can now log in as an employee!\n");
+    console.log("\nEmail:", employeeData.email);
+    console.log("Password:", employeeData.password);
+    console.log("Employee ID:", employeeRecord.employeeId);
+    console.log("\nYou can now log in as an employee!\n");
 
     process.exit(0);
   } catch (error) {
-    console.error("❌ Error:", error.message);
+    console.error("Error:", error.message);
     process.exit(1);
   }
 };

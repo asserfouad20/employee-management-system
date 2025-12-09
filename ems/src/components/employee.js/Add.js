@@ -23,6 +23,15 @@ export default function AddEmployee() {
   const [submitting, setSubmitting] = useState(false);
   const [departments, setDepartments] = useState([]);
 
+  // Calculate min and max dates for age 23-45
+  const today = new Date();
+  const maxDate = new Date(today.getFullYear() - 23, today.getMonth(), today.getDate())
+    .toISOString()
+    .split("T")[0];
+  const minDate = new Date(today.getFullYear() - 45, today.getMonth(), today.getDate())
+    .toISOString()
+    .split("T")[0];
+
   useEffect(() => {
     const load = async () => {
       try {
@@ -41,6 +50,24 @@ export default function AddEmployee() {
     const { name, value, files } = e.target;
     if (name === "profileImage") {
       setForm((f) => ({ ...f, profileImage: files[0] }));
+    } else if (name === "dob") {
+      // Validate age between 23-45 years
+      if (value) {
+        const birthDate = new Date(value);
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        const dayDiff = today.getDate() - birthDate.getDate();
+
+        // Calculate exact age considering month and day
+        const exactAge = monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) ? age - 1 : age;
+
+        if (exactAge < 23 || exactAge > 45) {
+          showToast.error("Employee age must be between 23 and 45 years old");
+          return; // Don't update the form state
+        }
+      }
+      setForm((f) => ({ ...f, [name]: value }));
     } else {
       setForm((f) => ({ ...f, [name]: value }));
     }
@@ -71,7 +98,7 @@ export default function AddEmployee() {
     } catch (err) {
       const validationErrors = err.response?.data?.errors;
       if (validationErrors && typeof validationErrors === "object") {
-        console.groupCollapsed("🛑 Add employee validation errors");
+        console.groupCollapsed("Add employee validation errors");
         Object.entries(validationErrors).forEach(([field, { message }]) => {
           console.error(`${field}: ${message}`);
         });
@@ -146,14 +173,17 @@ export default function AddEmployee() {
         </div>
         {/* Date of Birth */}
         <div>
-          <label className={labelClasses}>Date of Birth</label>
+          <label className={labelClasses}>Date of Birth (Age: 23-45)</label>
           <input
             name="dob"
             type="date"
             value={form.dob}
             onChange={handleChange}
+            min={minDate}
+            max={maxDate}
             required
             className={inputClasses}
+            title="Employee must be between 23 and 45 years old"
           />
         </div>
         {/* Gender */}

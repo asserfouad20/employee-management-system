@@ -7,6 +7,6 @@ export default function connectToDatabase() {
     .connect(process.env.MONGO_URL, {
       /* your opts */
     })
-    .then(() => console.log("✅ MongoDB connected!"))
-    .catch((err) => console.error("❌ MongoDB connection error:", err));
+    .then(() => console.log("MongoDB connected!"))
+    .catch((err) => console.error("MongoDB connection error:", err));
 }
