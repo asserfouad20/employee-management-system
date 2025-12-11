@@ -163,7 +163,7 @@ const AttendanceReport = () => {
   );
 
   return (
-    <div className="p-6">
+    <div className="p-3 md:p-6">
       {toast.show && (
         <div
           className={`fixed top-0 left-0 sm:top-4 sm:left-4 lg:top-6 lg:left-6 z-50 ${
@@ -174,13 +174,13 @@ const AttendanceReport = () => {
         </div>
       )}
 
-      <div className="bg-[#242b35] rounded-xl shadow-lg p-6 border border-gray-700/50">
-        <h2 className="text-2xl font-bold text-gray-100 mb-6">
+      <div className="bg-[#242b35] rounded-xl shadow-lg p-3 md:p-6 border border-gray-700/50">
+        <h2 className="text-lg md:text-2xl font-bold text-gray-100 mb-4 md:mb-6">
           Attendance Report
         </h2>
 
         {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 md:mb-6">
           <div>
             <label className="block text-gray-300 font-medium mb-2">
               Employee
@@ -246,7 +246,7 @@ const AttendanceReport = () => {
 
         {/* Summary Cards */}
         {reportData && reportData.summary && (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4 mb-4 md:mb-6">
             <div className="bg-[#1a1f26] rounded-lg p-4 border border-gray-700">
               <p className="text-gray-400 text-sm font-medium">Total Days</p>
               <p className="text-2xl font-bold text-gray-100">
@@ -311,7 +311,9 @@ const AttendanceReport = () => {
             <p className="text-gray-400">Generating report...</p>
           </div>
         ) : reportData && reportData.records ? (
-          <DataTable
+          <div className="overflow-x-auto -mx-3 md:mx-0">
+            <div className="min-w-[700px]">
+              <DataTable
             columns={columns}
             data={reportData.records}
             pagination
@@ -367,6 +369,8 @@ const AttendanceReport = () => {
               },
             }}
           />
+            </div>
+          </div>
         ) : (
           <div className="flex flex-col items-center justify-center h-48">
             <p className="text-gray-400 mb-2">No report generated yet</p>

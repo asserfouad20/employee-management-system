@@ -172,9 +172,9 @@ export default function ViewSalary() {
   }, [search, salaries]);
 
   return (
-    <div className="pt-5 px-6 space-y-4">
+    <div className="pt-5 px-3 md:px-6 space-y-4">
       {/* 1) Title above */}
-      <h3 className="text-2xl font-bold text-gray-100">Salary History</h3>
+      <h3 className="text-lg md:text-2xl font-bold text-gray-100">Salary History</h3>
 
       {/* 2) Back button below title */}
       <div>
@@ -190,24 +190,26 @@ export default function ViewSalary() {
       </div>
 
       {/* 3) Table */}
-      <div className="mt-5 bg-[#242b35] shadow-2xl rounded-xl overflow-hidden border border-gray-700/50">
-        <DataTable
-          columns={columns}
-          data={filtered}
-          customStyles={customStyles}
-          progressPending={loading}
-          pagination
-          noDataComponent={
-            <div className="py-12 text-center text-gray-400">
-              No salary records found
-            </div>
-          }
-          progressComponent={
-            <div className="py-12 text-center text-gray-400">
-              Loading salary records...
-            </div>
-          }
-        />
+      <div className="mt-5 bg-[#242b35] shadow-2xl rounded-xl border border-gray-700/50 overflow-x-auto">
+        <div className="min-w-[800px]">
+          <DataTable
+            columns={columns}
+            data={filtered}
+            customStyles={customStyles}
+            progressPending={loading}
+            pagination
+            noDataComponent={
+              <div className="py-12 text-center text-gray-400">
+                No salary records found
+              </div>
+            }
+            progressComponent={
+              <div className="py-12 text-center text-gray-400">
+                Loading salary records...
+              </div>
+            }
+          />
+        </div>
       </div>
     </div>
   );

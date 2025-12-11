@@ -53,19 +53,19 @@ const View = () => {
   }
 
   return (
-    <div className="pt-5 px-6 space-y-4">
+    <div className="pt-5 px-3 md:px-6 space-y-4">
       {/* Back button */}
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0f1419]"
+        className="inline-flex items-center bg-blue-600 text-white px-3 md:px-4 py-2 rounded-lg text-sm md:text-base font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0f1419]"
       >
         <FaArrowLeft className="mr-2" />
         Back to Employees
       </button>
 
       {/* Details card */}
-      <div className="max-w-3xl mx-auto bg-[#242b35] p-8 rounded-2xl shadow-2xl border border-gray-700/50">
-        <h2 className="text-2xl font-bold mb-8 text-center text-gray-100">
+      <div className="max-w-3xl mx-auto bg-[#242b35] p-4 md:p-8 rounded-2xl shadow-2xl border border-gray-700/50">
+        <h2 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-center text-gray-100">
           Employee Details
         </h2>
 
@@ -75,12 +75,12 @@ const View = () => {
             <img
               src={`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/uploads/${employee.userId.profileImage}`}
               alt={employee.userId.name}
-              className="h-64 w-52 rounded-full object-cover"
+              className="h-48 w-40 md:h-64 md:w-52 rounded-full object-cover"
             />
           </div>
 
           {/* Details List */}
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             <div className="flex space-x-3">
               <p className="text-lg font-bold text-gray-300">Name:</p>
               <p className="font-medium text-gray-200">{employee.userId.name}</p>

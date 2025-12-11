@@ -236,7 +236,7 @@ const Attendance = () => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="p-3 md:p-6">
       {toast.show && (
         <div
           className={`fixed top-0 left-0 sm:top-4 sm:left-4 lg:top-6 lg:left-6 z-50 ${
@@ -247,20 +247,20 @@ const Attendance = () => {
         </div>
       )}
 
-      <div className="bg-[#242b35] rounded-xl shadow-lg p-6 border border-gray-700/50">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-100">
+      <div className="bg-[#242b35] rounded-xl shadow-lg p-3 md:p-6 border border-gray-700/50">
+        <div className="flex justify-between items-center mb-4 md:mb-6">
+          <h2 className="text-lg md:text-2xl font-bold text-gray-100">
             Attendance Management
           </h2>
         </div>
 
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 mb-4">
           <input
             type="text"
             placeholder="Search by name, ID, or status..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
+            className="bg-[#1a1f26] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg px-4 py-2 w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out"
           />
 
           <button
@@ -276,7 +276,9 @@ const Attendance = () => {
             <p className="text-gray-400">Loading...</p>
           </div>
         ) : (
-          <DataTable
+          <div className="overflow-x-auto -mx-3 md:mx-0">
+            <div className="min-w-[700px]">
+              <DataTable
             columns={columns}
             data={filteredRecords}
             pagination
@@ -332,6 +334,8 @@ const Attendance = () => {
               },
             }}
           />
+            </div>
+          </div>
         )}
       </div>
 

@@ -109,11 +109,11 @@ export default function EditEmployee() {
   const labelClasses = "block text-sm font-medium text-gray-300";
 
   return (
-    <div className="max-w-4xl mx-auto mt-20 bg-[#242b35] p-8 rounded-3xl shadow-2xl border border-gray-700/50">
-      <h2 className="text-2xl font-bold mb-6 text-gray-100">Edit Employee</h2>
+    <div className="max-w-4xl mx-auto mt-8 md:mt-20 bg-[#242b35] p-4 md:p-8 rounded-3xl shadow-2xl border border-gray-700/50">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-100">Edit Employee</h2>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
       >
         {/* Name */}
         <div>
@@ -180,7 +180,7 @@ export default function EditEmployee() {
           />
         </div>
         {/* Department */}
-        <div className="col-span-2">
+        <div className="md:col-span-2 lg:col-span-2">
           <label className={labelClasses}>
             Department
           </label>
@@ -201,7 +201,7 @@ export default function EditEmployee() {
         </div>
 
         {/* Submit & Back */}
-        <div className="md:col-span-3 flex justify-center items-center space-x-6 mt-6">
+        <div className="md:col-span-2 lg:col-span-3 flex flex-col sm:flex-row justify-center items-center gap-4 sm:space-x-6 sm:gap-0 mt-6">
           <Link
             to="/admin-dashboard/employees"
             className="text-blue-400 hover:text-blue-300 hover:underline focus:outline-none transition-all duration-200 ease-in-out"

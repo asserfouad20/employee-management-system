@@ -84,19 +84,19 @@ const Settings = () => {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-3 md:p-6 max-w-2xl mx-auto">
       {/* Header */}
-      <div className="bg-[#242b35] rounded-lg shadow-md p-6 mb-6 border border-gray-700/50">
+      <div className="bg-[#242b35] rounded-lg shadow-md p-4 md:p-6 mb-4 md:mb-6 border border-gray-700/50">
         <div className="flex items-center gap-3 mb-2">
-          <FaLock className="text-3xl text-blue-400" />
-          <h2 className="text-2xl font-bold text-gray-100">Settings</h2>
+          <FaLock className="text-2xl md:text-3xl text-blue-400" />
+          <h2 className="text-xl md:text-2xl font-bold text-gray-100">Settings</h2>
         </div>
-        <p className="text-gray-400">Manage your account security settings</p>
+        <p className="text-sm md:text-base text-gray-400">Manage your account security settings</p>
       </div>
 
       {/* Change Password Form */}
-      <div className="bg-[#242b35] rounded-lg shadow-md p-6 border border-gray-700/50">
-        <h3 className="text-xl font-semibold text-gray-100 mb-4">
+      <div className="bg-[#242b35] rounded-lg shadow-md p-4 md:p-6 border border-gray-700/50">
+        <h3 className="text-lg md:text-xl font-semibold text-gray-100 mb-4">
           Change Password
         </h3>
 

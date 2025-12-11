@@ -57,11 +57,11 @@ const AdminSummary = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-3 md:p-6">
       {/* Overview */}
-      <h3 className="text-2xl font-bold text-gray-100 mb-2">Dashboard Overview</h3>
-      <p className="text-gray-400 mb-6">Key metrics and statistics</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+      <h3 className="text-xl md:text-2xl font-bold text-gray-100 mb-2">Dashboard Overview</h3>
+      <p className="text-sm md:text-base text-gray-400 mb-4 md:mb-6">Key metrics and statistics</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-4 md:mt-6">
         <SummaryCard
           icon={<FaUser />}
           text="Total Employees"
@@ -83,10 +83,10 @@ const AdminSummary = () => {
       </div>
 
       {/* Leave Details */}
-      <div className="mt-12">
-        <h4 className="text-center text-2xl font-bold text-gray-100 mb-2">Leave Details</h4>
-        <p className="text-center text-gray-400 mb-6">Current leave status overview</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+      <div className="mt-8 md:mt-12">
+        <h4 className="text-center text-xl md:text-2xl font-bold text-gray-100 mb-2">Leave Details</h4>
+        <p className="text-center text-sm md:text-base text-gray-400 mb-4 md:mb-6">Current leave status overview</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-4 md:mt-6">
           <SummaryCard
             icon={<FaFileAlt />}
             text="Leave Applied"

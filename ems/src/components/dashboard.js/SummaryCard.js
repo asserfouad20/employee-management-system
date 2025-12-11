@@ -4,13 +4,13 @@ const SummaryCard = ({ icon, text, number, color }) => {
   return (
     <div className="rounded-xl flex bg-[#242b35] border border-gray-700/50 shadow-lg hover:shadow-xl transition-shadow duration-300">
       <div
-        className={`text-3xl flex items-center justify-center ${color} text-white px-4 border-r-2 border-gray-700 rounded-l-xl`}
+        className={`text-2xl md:text-3xl flex items-center justify-center ${color} text-white px-3 md:px-4 border-r-2 border-gray-700 rounded-l-xl`}
       >
         {icon}
       </div>
-      <div className="pl-4 py-3 flex flex-col justify-center">
-        <p className="text-base font-medium text-gray-400">{text}</p>
-        <p className="text-2xl font-bold text-gray-100">{number}</p>
+      <div className="pl-3 md:pl-4 py-3 flex flex-col justify-center">
+        <p className="text-sm md:text-base font-medium text-gray-400">{text}</p>
+        <p className="text-xl md:text-2xl font-bold text-gray-100">{number}</p>
       </div>
     </div>
   );

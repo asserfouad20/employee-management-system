@@ -42,16 +42,16 @@ const Profile = () => {
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-3xl font-bold mb-6 text-gray-100">My Profile</h2>
+    <div className="p-3 md:p-6">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-100">My Profile</h2>
 
       <div className="bg-[#242b35] rounded-xl shadow-lg overflow-hidden border border-gray-700/50">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-500 h-32"></div>
+        <div className="bg-gradient-to-r from-blue-600 to-blue-500 h-24 md:h-32"></div>
 
-        <div className="px-8 pb-8">
+        <div className="px-4 md:px-8 pb-6 md:pb-8">
           {/* Profile Picture */}
-          <div className="flex items-end -mt-16 mb-6">
+          <div className="flex flex-col sm:flex-row items-center sm:items-end -mt-12 md:-mt-16 mb-6">
             <img
               src={
                 employee.userId?.profileImage
@@ -61,16 +61,16 @@ const Profile = () => {
                     )}&background=0D8ABC&color=fff&size=200`
               }
               alt={employee.userId?.name}
-              className="w-32 h-32 rounded-full border-4 border-[#242b35] shadow-lg object-cover"
+              className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-[#242b35] shadow-lg object-cover"
             />
-            <div className="ml-6 pb-2">
-              <h3 className="text-2xl font-bold text-gray-100">{employee.userId?.name}</h3>
-              <p className="text-gray-400">{employee.designation || "Employee"}</p>
+            <div className="sm:ml-6 mt-3 sm:mt-0 sm:pb-2 text-center sm:text-left">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-100">{employee.userId?.name}</h3>
+              <p className="text-sm md:text-base text-gray-400">{employee.designation || "Employee"}</p>
             </div>
           </div>
 
           {/* Profile Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <FaUser className="text-gray-500" />

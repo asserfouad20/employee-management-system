@@ -8,7 +8,7 @@ const EmployeeDashboard = () => {
     <div className="flex bg-[#0f1419]">
       <Sidebar />
 
-      <div className="flex-1 ml-64 bg-[#0f1419] min-h-screen">
+      <div className="flex-1 ml-0 lg:ml-64 bg-[#0f1419] min-h-screen">
         <NavBar />
         <Outlet />
       </div>

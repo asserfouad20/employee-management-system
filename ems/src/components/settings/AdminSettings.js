@@ -217,7 +217,7 @@ const AdminSettings = () => {
   };
 
   return (
-    <div className="p-6 relative">
+    <div className="p-3 md:p-6 relative">
       {/* Toast */}
       {toast.show && (
         <div
@@ -239,47 +239,47 @@ const AdminSettings = () => {
       )}
 
       {/* Header */}
-      <h2 className="text-2xl font-bold mb-6 text-gray-100">Admin Settings</h2>
+      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-100">Admin Settings</h2>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-6 border-b border-gray-700">
+      <div className="flex gap-1 md:gap-2 mb-4 md:mb-6 border-b border-gray-700 overflow-x-auto">
         <button
           onClick={() => setActiveTab("password")}
-          className={`flex items-center gap-2 px-4 py-3 font-semibold transition-colors ${
+          className={`flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 md:py-3 text-sm md:text-base font-semibold transition-colors whitespace-nowrap ${
             activeTab === "password"
               ? "text-blue-400 border-b-2 border-blue-500"
               : "text-gray-400 hover:text-blue-400"
           }`}
         >
           <FaLock />
-          Change Password
+          <span className="hidden sm:inline">Change </span>Password
         </button>
         <button
           onClick={() => setActiveTab("company")}
-          className={`flex items-center gap-2 px-4 py-3 font-semibold transition-colors ${
+          className={`flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 md:py-3 text-sm md:text-base font-semibold transition-colors whitespace-nowrap ${
             activeTab === "company"
               ? "text-blue-400 border-b-2 border-blue-500"
               : "text-gray-400 hover:text-blue-400"
           }`}
         >
           <FaBuilding />
-          Company Info
+          Company<span className="hidden sm:inline"> Info</span>
         </button>
         <button
           onClick={() => setActiveTab("leave")}
-          className={`flex items-center gap-2 px-4 py-3 font-semibold transition-colors ${
+          className={`flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 md:py-3 text-sm md:text-base font-semibold transition-colors whitespace-nowrap ${
             activeTab === "leave"
               ? "text-blue-400 border-b-2 border-blue-500"
               : "text-gray-400 hover:text-blue-400"
           }`}
         >
           <FaCalendarAlt />
-          Leave Types
+          Leave<span className="hidden sm:inline"> Types</span>
         </button>
       </div>
 
       {/* Tab Content */}
-      <div className="bg-[#242b35] rounded-xl shadow-lg p-8 border border-gray-700/50">
+      <div className="bg-[#242b35] rounded-xl shadow-lg p-4 md:p-8 border border-gray-700/50">
         {/* Password Change Tab */}
         {activeTab === "password" && (
           <div className="max-w-2xl mx-auto">

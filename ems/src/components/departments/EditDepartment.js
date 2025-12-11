@@ -79,8 +79,8 @@ const EditDepartment = () => {
   const labelClasses = "block font-medium mb-1 text-gray-300";
 
   return (
-    <div className="max-w-md mx-auto mt-32 p-6 bg-[#242b35] rounded-xl shadow-2xl border border-gray-700/50">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-100">Edit Department</h2>
+    <div className="max-w-md mx-auto mt-20 md:mt-32 p-4 md:p-6 bg-[#242b35] rounded-xl shadow-2xl border border-gray-700/50">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center text-gray-100">Edit Department</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label htmlFor="dep_name" className={labelClasses}>

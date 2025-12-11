@@ -38,8 +38,8 @@ const AddDepartment = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-40 bg-[#242b35] p-8 rounded-2xl shadow-2xl w-96 border border-gray-700/50">
-      <h2 className="text-center text-2xl font-bold mb-6 text-gray-100">
+    <div className="max-w-3xl mx-auto mt-20 md:mt-40 bg-[#242b35] p-4 md:p-8 rounded-2xl shadow-2xl w-full max-w-md md:w-96 border border-gray-700/50">
+      <h2 className="text-center text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-100">
         Add New Department
       </h2>
       <form onSubmit={handleSubmit}>

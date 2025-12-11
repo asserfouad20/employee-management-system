@@ -127,45 +127,47 @@ export default function List() {
   );
 
   return (
-    <div className="pt-5 px-6 space-y-4">
+    <div className="pt-5 px-3 md:px-6 space-y-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-2xl font-bold text-gray-100">Manage Employees</h3>
+        <h3 className="text-lg md:text-2xl font-bold text-gray-100">Manage Employees</h3>
       </div>
 
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-0">
         <input
           type="text"
           placeholder="Search By Emp Name"
           value={searchTerm} // ← controlled input
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-60 px-4 py-2 bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          className="w-full sm:w-60 px-4 py-2 bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
         />
 
         <Link
           to="/admin-dashboard/add-employee"
-          className="flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          className="flex items-center justify-center w-full sm:w-10 h-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
           aria-label="Add Employee"
         >
           <FaPlus className="text-sm" />
         </Link>
       </div>
 
-      <div className="mt-5 bg-[#242b35] shadow-2xl rounded-xl overflow-hidden border border-gray-700/50">
-        <DataTable
-          columns={employeeColumns}
-          data={filteredEmployees}
-          customStyles={customStyles}
-          progressPending={loading}
-          progressComponent={
-            <div className="flex items-center justify-center h-48">
-              <span className="text-3xl font-bold text-gray-300">Loading…</span>
-            </div>
-          }
-          pagination
-          noDataComponent={
-            <div className="p-8 text-center text-gray-400">No employees found</div>
-          }
-        />
+      <div className="mt-5 bg-[#242b35] shadow-2xl rounded-xl border border-gray-700/50 overflow-x-auto">
+        <div className="min-w-[800px]">
+          <DataTable
+            columns={employeeColumns}
+            data={filteredEmployees}
+            customStyles={customStyles}
+            progressPending={loading}
+            progressComponent={
+              <div className="flex items-center justify-center h-48">
+                <span className="text-xl md:text-3xl font-bold text-gray-300">Loading…</span>
+              </div>
+            }
+            pagination
+            noDataComponent={
+              <div className="p-8 text-center text-gray-400">No employees found</div>
+            }
+          />
+        </div>
       </div>
     </div>
   );
