@@ -138,7 +138,7 @@ export default function List() {
           placeholder="Search By Emp Name"
           value={searchTerm} // ← controlled input
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full sm:flex-1 sm:mr-4 px-4 py-2 bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          className="w-full sm:w-80 px-4 py-2 bg-[#242b35] border border-gray-600 text-gray-200 placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
         />
 
         <Link
